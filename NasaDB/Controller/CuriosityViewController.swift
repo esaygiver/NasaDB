@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CuriosityViewController: UIViewController {
 
+//    lazy var curiosityRover =
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

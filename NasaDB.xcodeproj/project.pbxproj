@@ -3,17 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		23DA93BD8669D0A1D88DBECA /* Pods_NasaDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */; };
 		849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61B25EFCBDE0021170A /* AppDelegate.swift */; };
 		849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61D25EFCBDE0021170A /* SceneDelegate.swift */; };
-		849EF62025EFCBDE0021170A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61F25EFCBDE0021170A /* ViewController.swift */; };
+		849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */; };
 		849EF62325EFCBDE0021170A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849EF62125EFCBDE0021170A /* Main.storyboard */; };
 		849EF62525EFCBE00021170A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849EF62425EFCBE00021170A /* Assets.xcassets */; };
 		849EF62825EFCBE00021170A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849EF62625EFCBE00021170A /* LaunchScreen.storyboard */; };
+		849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63125EFCF140021170A /* OpportunityViewController.swift */; };
+		849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63325EFCF2C0021170A /* SpiritViewController.swift */; };
+		849EF63925F0172A0021170A /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63825F0172A0021170A /* Photos.swift */; };
+		849EF63B25F019600021170A /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63A25F019600021170A /* Rover.swift */; };
+		849EF63D25F0199C0021170A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63C25F0199B0021170A /* Camera.swift */; };
+		849EF64025F01B580021170A /* imageView + KF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63F25F01B580021170A /* imageView + KF.swift */; };
+		849EF64325F01C190021170A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64225F01C190021170A /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,11 +28,18 @@
 		849EF61825EFCBDE0021170A /* NasaDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NasaDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849EF61B25EFCBDE0021170A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		849EF61D25EFCBDE0021170A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		849EF61F25EFCBDE0021170A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriosityViewController.swift; sourceTree = "<group>"; };
 		849EF62225EFCBDE0021170A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		849EF62425EFCBE00021170A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		849EF62725EFCBE00021170A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		849EF62925EFCBE00021170A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849EF63125EFCF140021170A /* OpportunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityViewController.swift; sourceTree = "<group>"; };
+		849EF63325EFCF2C0021170A /* SpiritViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritViewController.swift; sourceTree = "<group>"; };
+		849EF63825F0172A0021170A /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		849EF63A25F019600021170A /* Rover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
+		849EF63C25F0199B0021170A /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		849EF63F25F01B580021170A /* imageView + KF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "imageView + KF.swift"; sourceTree = "<group>"; };
+		849EF64225F01C190021170A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NasaDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.release.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,15 +85,78 @@
 		849EF61A25EFCBDE0021170A /* NasaDB */ = {
 			isa = PBXGroup;
 			children = (
-				849EF61B25EFCBDE0021170A /* AppDelegate.swift */,
-				849EF61D25EFCBDE0021170A /* SceneDelegate.swift */,
-				849EF61F25EFCBDE0021170A /* ViewController.swift */,
-				849EF62125EFCBDE0021170A /* Main.storyboard */,
-				849EF62425EFCBE00021170A /* Assets.xcassets */,
-				849EF62625EFCBE00021170A /* LaunchScreen.storyboard */,
+				849EF64125F01C030021170A /* Network */,
+				849EF63E25F01B410021170A /* Extension */,
+				849EF63725F015C70021170A /* Model */,
+				849EF63525EFCF350021170A /* App */,
+				849EF63025EFCEE90021170A /* Controller */,
+				849EF62F25EFCEA20021170A /* View */,
+				849EF63625EFCF450021170A /* Supporting Files */,
 				849EF62925EFCBE00021170A /* Info.plist */,
 			);
 			path = NasaDB;
+			sourceTree = "<group>";
+		};
+		849EF62F25EFCEA20021170A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				849EF62125EFCBDE0021170A /* Main.storyboard */,
+				849EF62625EFCBE00021170A /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		849EF63025EFCEE90021170A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
+				849EF63125EFCF140021170A /* OpportunityViewController.swift */,
+				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		849EF63525EFCF350021170A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				849EF61B25EFCBDE0021170A /* AppDelegate.swift */,
+				849EF61D25EFCBDE0021170A /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		849EF63625EFCF450021170A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				849EF62425EFCBE00021170A /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		849EF63725F015C70021170A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				849EF63825F0172A0021170A /* Photos.swift */,
+				849EF63C25F0199B0021170A /* Camera.swift */,
+				849EF63A25F019600021170A /* Rover.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		849EF63E25F01B410021170A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				849EF63F25F01B580021170A /* imageView + KF.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		849EF64125F01C030021170A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				849EF64225F01C190021170A /* API.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		942218227CDA1E258718C920 /* Pods */ = {
@@ -88,7 +165,6 @@
 				1188A7C1BC9BCCE290D23A39 /* Pods-NasaDB.debug.xcconfig */,
 				F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -207,9 +283,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849EF62025EFCBDE0021170A /* ViewController.swift in Sources */,
+				849EF63D25F0199C0021170A /* Camera.swift in Sources */,
+				849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */,
 				849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */,
+				849EF63925F0172A0021170A /* Photos.swift in Sources */,
+				849EF64325F01C190021170A /* API.swift in Sources */,
+				849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */,
+				849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */,
+				849EF64025F01B580021170A /* imageView + KF.swift in Sources */,
 				849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */,
+				849EF63B25F019600021170A /* Rover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
