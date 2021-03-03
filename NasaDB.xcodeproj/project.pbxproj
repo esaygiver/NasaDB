@@ -24,6 +24,7 @@
 		849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64425F01E8C0021170A /* NetworkManager.swift */; };
 		849EF64725F01EDB0021170A /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64625F01EDB0021170A /* Networkable.swift */; };
 		849EF64A25F037160021170A /* OpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */; };
+		849EF64C25F043770021170A /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64B25F043770021170A /* PopUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		849EF64425F01E8C0021170A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		849EF64625F01EDB0021170A /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
+		849EF64B25F043770021170A /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NasaDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.release.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 				849EF64825F036EF0021170A /* Opportunity ViewController */,
 				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
 				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
+				849EF64B25F043770021170A /* PopUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				849EF64325F01C190021170A /* API.swift in Sources */,
 				849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */,
 				849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */,
+				849EF64C25F043770021170A /* PopUpViewController.swift in Sources */,
 				849EF64025F01B580021170A /* imageView + KF.swift in Sources */,
 				849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */,
 				849EF64725F01EDB0021170A /* Networkable.swift in Sources */,

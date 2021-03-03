@@ -49,7 +49,7 @@ extension NasaAPI: TargetType {
     var task: Task {
         switch self {
         case .Opportunity, .Curiosity, .Spirit:
-            return .requestParameters(parameters: ["sol" : 1000, "api_key" : APIKey], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["sol" : 1, "api_key" : APIKey], encoding: URLEncoding.queryString)
         }
     }
     
