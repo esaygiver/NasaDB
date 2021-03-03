@@ -16,18 +16,20 @@ enum NasaAPI {
 }
 
 extension NasaAPI: TargetType {
+    
     var baseURL: URL {
         guard let url = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/") else { fatalError() }
+        return url
     }
     
     var path: String {
         switch self {
         case .Opportunity:
-            return "Opportunity"
+            return "Opportunity/photos?sol=1000"
         case .Curiosity:
-            return "Curiosity"
+            return "Curiosity/photos?sol=1000"
         case .Spirit:
-            return "Spirit"
+            return "Spirit/photos?sol=1000"
         }
     }
     
@@ -39,15 +41,18 @@ extension NasaAPI: TargetType {
     }
     
     var sampleData: Data {
-        <#code#>
+        return Data()
     }
     
     var task: Task {
-        <#code#>
+        switch self {
+        case .Opportunity, .Curiosity, .Spirit:
+            return .requestParameters(parameters: ["api_key" : "DEMO_KEY"], encoding: URLEncoding.queryString)
+        }
     }
     
     var headers: [String : String]? {
-        <#code#>
+        return nil
     }
     
     
