@@ -15,6 +15,8 @@ enum NasaAPI {
     case Spirit
 }
 
+fileprivate let APIKey = "LUL419Ui2W9PchaVhajYSPTsq3FSH5JF50AZNhl7"
+
 extension NasaAPI: TargetType {
     
     var baseURL: URL {
@@ -25,11 +27,11 @@ extension NasaAPI: TargetType {
     var path: String {
         switch self {
         case .Opportunity:
-            return "Opportunity/photos?sol=1000"
+            return "Opportunity/photos"
         case .Curiosity:
-            return "Curiosity/photos?sol=1000"
+            return "Curiosity/photos"
         case .Spirit:
-            return "Spirit/photos?sol=1000"
+            return "Spirit/photos"
         }
     }
     
@@ -47,7 +49,7 @@ extension NasaAPI: TargetType {
     var task: Task {
         switch self {
         case .Opportunity, .Curiosity, .Spirit:
-            return .requestParameters(parameters: ["api_key" : "DEMO_KEY"], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["sol" : 1000, "api_key" : APIKey], encoding: URLEncoding.queryString)
         }
     }
     

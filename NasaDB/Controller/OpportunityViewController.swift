@@ -7,24 +7,49 @@
 //
 
 import UIKit
+import Moya
 
-class OpportunityViewController: UIViewController {
+final class OpportunityViewController: UIViewController {
 
+    //MARK: - IBOutlets
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    lazy var opportunityData = [Photo]()
+    var networkManager = NetworkManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        getsRoverData()
+    }
+}
+
+
+//MARK: - Network Request
+extension OpportunityViewController {
+    func getsRoverData() {
+        networkManager.fetchOppurtunityRover { [weak self] photos in
+            guard let self = self else { return }
+            self.opportunityData = photos
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+}
+    
+//MARK: - CollectionView Delegate & DataSource
+extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return opportunityData.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath)
+        return cell
     }
-    */
-
+    
 }

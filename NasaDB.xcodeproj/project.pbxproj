@@ -21,6 +21,8 @@
 		849EF63D25F0199C0021170A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63C25F0199B0021170A /* Camera.swift */; };
 		849EF64025F01B580021170A /* imageView + KF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF63F25F01B580021170A /* imageView + KF.swift */; };
 		849EF64325F01C190021170A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64225F01C190021170A /* API.swift */; };
+		849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64425F01E8C0021170A /* NetworkManager.swift */; };
+		849EF64725F01EDB0021170A /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64625F01EDB0021170A /* Networkable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		849EF63C25F0199B0021170A /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		849EF63F25F01B580021170A /* imageView + KF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "imageView + KF.swift"; sourceTree = "<group>"; };
 		849EF64225F01C190021170A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		849EF64425F01E8C0021170A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		849EF64625F01EDB0021170A /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NasaDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.release.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,6 +97,7 @@
 				849EF62F25EFCEA20021170A /* View */,
 				849EF63625EFCF450021170A /* Supporting Files */,
 				849EF62925EFCBE00021170A /* Info.plist */,
+				849EF64625F01EDB0021170A /* Networkable.swift */,
 			);
 			path = NasaDB;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				849EF64225F01C190021170A /* API.swift */,
+				849EF64425F01E8C0021170A /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -287,11 +293,13 @@
 				849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */,
 				849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */,
 				849EF63925F0172A0021170A /* Photos.swift in Sources */,
+				849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */,
 				849EF64325F01C190021170A /* API.swift in Sources */,
 				849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */,
 				849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */,
 				849EF64025F01B580021170A /* imageView + KF.swift in Sources */,
 				849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */,
+				849EF64725F01EDB0021170A /* Networkable.swift in Sources */,
 				849EF63B25F019600021170A /* Rover.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
