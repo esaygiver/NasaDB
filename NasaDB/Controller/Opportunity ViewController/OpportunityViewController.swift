@@ -48,8 +48,12 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath) as! OpportunityCollectionViewCell
+        let selectedCell = opportunityData[indexPath.row]
+        cell.configureOutlets(with: selectedCell)
         return cell
     }
+    
+    
     
 }
