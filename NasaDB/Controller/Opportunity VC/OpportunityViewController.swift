@@ -13,9 +13,32 @@ final class OpportunityViewController: UIViewController {
 
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var noPhotoView: UIView!
+    @IBOutlet weak var cameraPicker: UIPickerView!
     
     lazy var opportunityData = [Photo]()
-    var networkManager = NetworkManager()
+    public var networkManager = NetworkManager()
+    lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
+    lazy var cameraQuery: String = ""
+    
+    var screenState: CameraListState? {
+        didSet {
+            if screenState == .searching {
+                collectionView.isHidden = true
+                noPhotoView.isHidden = true
+                filterView.isHidden = false
+            } else if screenState == .loaded {
+                collectionView.isHidden = false
+                filterView.isHidden = true
+                noPhotoView.isHidden = true
+            } else {
+                noPhotoView.isHidden = false
+                filterView.isHidden = true
+                collectionView.isHidden = true
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +50,17 @@ final class OpportunityViewController: UIViewController {
     func setUpDelegations() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        cameraPicker.delegate = self
+        cameraPicker.dataSource = self
+    }
+    
+    @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
+        if screenState == .searching {
+            fetchCameraTypeOfOpportunityRover(camera: cameraQuery)
+            screenState = .loaded
+        } else {
+            screenState = .searching
+        }
     }
 }
 
@@ -39,6 +73,21 @@ extension OpportunityViewController {
             self.opportunityData = photos
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func fetchCameraTypeOfOpportunityRover(camera: String) {
+        networkManager.opportunityRoverCameraSearch(camera: camera) { [weak self] photos in
+            guard let self = self else { return }
+            if photos.isEmpty {
+                self.screenState = .empty
+            } else {
+                self.opportunityData = photos
+                self.screenState = .loaded
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
@@ -67,7 +116,24 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
-        
+    }
+}
+
+//MARK: - CameraPicker Delegate
+extension OpportunityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cameraTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
+    }
 }

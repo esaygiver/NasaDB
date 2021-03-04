@@ -39,7 +39,6 @@ final class CuriosityViewController: UIViewController {
                 filterView.isHidden = true
                 collectionView.isHidden = true
                 noPhotoView.isHidden = false
-                
             }
         }
     }
@@ -57,17 +56,15 @@ final class CuriosityViewController: UIViewController {
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
     }
+    
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
             fetchCameraTypeOfCuriosityRover(camera: cameraQuery)
             screenState = .loaded
-            // TODO
         } else {
             screenState = .searching
-            // TODO
         }
     }
-    
 }
 
 //MARK: - Network Request

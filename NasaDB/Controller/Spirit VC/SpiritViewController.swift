@@ -12,9 +12,32 @@ final class SpiritViewController: UIViewController {
 
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var noPhotoView: UIView!
+    @IBOutlet weak var cameraPicker: UIPickerView!
     
     lazy var spiritData = [Photo]()
-    var networkManager = NetworkManager()
+    public var networkManager = NetworkManager()
+    lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
+    lazy var cameraQuery: String = ""
+    
+    var screenState: CameraListState? {
+        didSet {
+            if screenState == .searching {
+                collectionView.isHidden = true
+                noPhotoView.isHidden = true
+                filterView.isHidden = false
+            } else if screenState == .loaded {
+                filterView.isHidden = true
+                noPhotoView.isHidden = true
+                collectionView.isHidden = false
+            } else {
+                filterView.isHidden = true
+                collectionView.isHidden = true
+                noPhotoView.isHidden = false
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +49,17 @@ final class SpiritViewController: UIViewController {
     func setUpDelegatios() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        cameraPicker.delegate = self
+        cameraPicker.dataSource = self
+    }
+    
+    @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
+        if screenState == .searching {
+            screenState = .loaded
+            fetchCameraTypeOfSpiritRover(camera: cameraQuery)
+        } else {
+            screenState = .searching
+        }
     }
 }
 
@@ -37,6 +71,21 @@ extension SpiritViewController {
             self.spiritData = photos
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func fetchCameraTypeOfSpiritRover(camera: String) {
+        networkManager.spiritRoverCameraSearch(camera: camera) { [weak self] photos in
+            guard let self = self else { return }
+            if photos.isEmpty {
+                self.screenState = .empty
+            } else {
+                self.spiritData = photos
+                self.screenState = .loaded
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
@@ -64,6 +113,24 @@ extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSo
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
     }
-    
-    
 }
+
+//MARK: - CameraPicker Delegate
+extension SpiritViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cameraTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
+    }
+}
+
