@@ -25,6 +25,8 @@
 		849EF64725F01EDB0021170A /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64625F01EDB0021170A /* Networkable.swift */; };
 		849EF64A25F037160021170A /* OpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */; };
 		849EF64C25F043770021170A /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64B25F043770021170A /* PopUpViewController.swift */; };
+		849EF64F25F0D3110021170A /* CuriosityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */; };
+		849EF65225F0D5B80021170A /* SpiritCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		849EF64625F01EDB0021170A /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
 		849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
 		849EF64B25F043770021170A /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriosityCollectionViewCell.swift; sourceTree = "<group>"; };
+		849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritCollectionViewCell.swift; sourceTree = "<group>"; };
 		ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NasaDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.release.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +105,7 @@
 				849EF62F25EFCEA20021170A /* View */,
 				849EF63625EFCF450021170A /* Supporting Files */,
 				849EF62925EFCBE00021170A /* Info.plist */,
-				849EF64625F01EDB0021170A /* Networkable.swift */,
+				849EF65425F0DA4F0021170A /* Protocols */,
 			);
 			path = NasaDB;
 			sourceTree = "<group>";
@@ -119,9 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				849EF64825F036EF0021170A /* Opportunity ViewController */,
-				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
-				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
-				849EF64B25F043770021170A /* PopUpViewController.swift */,
+				849EF64D25F0D2F40021170A /* Curiosity ViewController */,
+				849EF65325F0D5D20021170A /* Spirit ViewController */,
+				849EF65025F0D4E50021170A /* PopUp ViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -177,6 +181,40 @@
 				849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */,
 			);
 			path = "Opportunity ViewController";
+			sourceTree = "<group>";
+		};
+		849EF64D25F0D2F40021170A /* Curiosity ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
+				849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */,
+			);
+			path = "Curiosity ViewController";
+			sourceTree = "<group>";
+		};
+		849EF65025F0D4E50021170A /* PopUp ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				849EF64B25F043770021170A /* PopUpViewController.swift */,
+			);
+			path = "PopUp ViewController";
+			sourceTree = "<group>";
+		};
+		849EF65325F0D5D20021170A /* Spirit ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
+				849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */,
+			);
+			path = "Spirit ViewController";
+			sourceTree = "<group>";
+		};
+		849EF65425F0DA4F0021170A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				849EF64625F01EDB0021170A /* Networkable.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		942218227CDA1E258718C920 /* Pods */ = {
@@ -308,11 +346,13 @@
 				849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */,
 				849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */,
 				849EF63925F0172A0021170A /* Photos.swift in Sources */,
+				849EF64F25F0D3110021170A /* CuriosityCollectionViewCell.swift in Sources */,
 				849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */,
 				849EF64325F01C190021170A /* API.swift in Sources */,
 				849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */,
 				849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */,
 				849EF64C25F043770021170A /* PopUpViewController.swift in Sources */,
+				849EF65225F0D5B80021170A /* SpiritCollectionViewCell.swift in Sources */,
 				849EF64025F01B580021170A /* imageView + KF.swift in Sources */,
 				849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */,
 				849EF64725F01EDB0021170A /* Networkable.swift in Sources */,

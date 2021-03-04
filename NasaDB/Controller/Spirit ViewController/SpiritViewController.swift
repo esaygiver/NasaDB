@@ -1,5 +1,5 @@
 //
-//  OpportunityViewController.swift
+//  SpiritViewController.swift
 //  NasaDB
 //
 //  Created by admin on 3.03.2021.
@@ -7,67 +7,63 @@
 //
 
 import UIKit
-import Moya
 
-final class OpportunityViewController: UIViewController {
+final class SpiritViewController: UIViewController {
 
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     
-    lazy var opportunityData = [Photo]()
+    lazy var spiritData = [Photo]()
     var networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpDelegations()
+        setUpDelegatios()
         getsRoverData()
     }
     
-    func setUpDelegations() {
+    func setUpDelegatios() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
 }
 
-
 //MARK: - Network Request
-extension OpportunityViewController {
+extension SpiritViewController {
     func getsRoverData() {
-        networkManager.fetchOppurtunityRover { [weak self] photos in
+        networkManager.fetchSpiritRover { [weak self] photos in
             guard let self = self else { return }
-            self.opportunityData = photos
+            self.spiritData = photos
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
 }
-    
 //MARK: - CollectionView Delegate & DataSource
-extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return opportunityData.count
+        return spiritData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath) as! OpportunityCollectionViewCell
-        let selectedCell = opportunityData[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpiritCell", for: indexPath) as! SpiritCollectionViewCell
+        let selectedCell = spiritData[indexPath.row]
         cell.configureImages(with: selectedCell)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selectedCell = opportunityData[indexPath.row]
+        let selectedCell = spiritData[indexPath.row]
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopUp") as! PopUpViewController
         popOverVC.roverData = selectedCell
         self.addChild(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
-        
     }
+    
     
 }

@@ -1,5 +1,5 @@
 //
-//  OpportunityViewController.swift
+//  ViewController.swift
 //  NasaDB
 //
 //  Created by admin on 3.03.2021.
@@ -7,67 +7,67 @@
 //
 
 import UIKit
-import Moya
 
-final class OpportunityViewController: UIViewController {
-
+final class CuriosityViewController: UIViewController {
+    
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     
-    lazy var opportunityData = [Photo]()
+    lazy var curiosityData = [Photo]()
     var networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setUpDelegations()
+        
+        setUpDelegatios()
         getsRoverData()
     }
     
-    func setUpDelegations() {
+    func setUpDelegatios() {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
 }
 
-
 //MARK: - Network Request
-extension OpportunityViewController {
+extension CuriosityViewController {
     func getsRoverData() {
-        networkManager.fetchOppurtunityRover { [weak self] photos in
+        networkManager.fetchCuriosityRover { [weak self] photos in
             guard let self = self else { return }
-            self.opportunityData = photos
+            self.curiosityData = photos
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
 }
-    
+
 //MARK: - CollectionView Delegate & DataSource
-extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return opportunityData.count
+        return curiosityData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath) as! OpportunityCollectionViewCell
-        let selectedCell = opportunityData[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CuriosityCell", for: indexPath) as! CuriosityCollectionViewCell
+        let selectedCell = curiosityData[indexPath.row]
         cell.configureImages(with: selectedCell)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        let selectedCell = opportunityData[indexPath.row]
+        let selectedCell = curiosityData[indexPath.row]
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopUp") as! PopUpViewController
         popOverVC.roverData = selectedCell
         self.addChild(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
-        
     }
+    
+    
+    
     
 }
