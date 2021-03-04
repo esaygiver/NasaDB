@@ -9,29 +9,37 @@
 import UIKit
 
 enum CameraListState {
-    case searching, loaded
-    
+    case searching, loaded, empty
 }
 
 final class CuriosityViewController: UIViewController {
     
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var noPhotoView: UIView!
     @IBOutlet weak var cameraPicker: UIPickerView!
     
     lazy var curiosityData = [Photo]()
-    var networkManager = NetworkManager()
+    public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
+    lazy var cameraQuery: String = ""
     
     var screenState: CameraListState? {
         didSet {
             if screenState == .searching {
                 collectionView.isHidden = true
-                emptyView.isHidden = false
-            } else {
-                emptyView.isHidden = true
+                noPhotoView.isHidden = true
+                filterView.isHidden = false
+            } else if screenState == .loaded {
+                filterView.isHidden = true
+                noPhotoView.isHidden = true
                 collectionView.isHidden = false
+            } else {
+                filterView.isHidden = true
+                collectionView.isHidden = true
+                noPhotoView.isHidden = false
+                
             }
         }
     }
@@ -51,6 +59,7 @@ final class CuriosityViewController: UIViewController {
     }
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
+            fetchCameraTypeOfCuriosityRover(camera: cameraQuery)
             screenState = .loaded
             // TODO
         } else {
@@ -69,6 +78,21 @@ extension CuriosityViewController {
             self.curiosityData = photos
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func fetchCameraTypeOfCuriosityRover(camera: String) {
+        networkManager.curiosityRoverCameraSearch(camera: camera) { [weak self] photos in
+            guard let self = self else { return }
+            if photos.isEmpty {
+                self.screenState = .empty
+            } else {
+                self.curiosityData = photos
+                self.screenState = .loaded
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
@@ -97,6 +121,7 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
+
     }
 }
 
@@ -109,7 +134,12 @@ extension CuriosityViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return cameraTypes.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
     }
 }

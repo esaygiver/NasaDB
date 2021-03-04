@@ -10,9 +10,12 @@ import Foundation
 import Moya
 
 enum NasaAPI {
-    case Opportunity
-    case Curiosity
-    case Spirit
+    case opportunity
+    case curiosity
+    case spirit
+    case opportunitySearch(camera: String)
+    case curiositySearch(camera: String)
+    case spiritSearch(camera: String)
 }
 
 fileprivate let APIKey = "LUL419Ui2W9PchaVhajYSPTsq3FSH5JF50AZNhl7"
@@ -26,18 +29,24 @@ extension NasaAPI: TargetType {
     
     var path: String {
         switch self {
-        case .Opportunity:
+        case .opportunity:
             return "Opportunity/latest_photos"
-        case .Curiosity:
+        case .curiosity:
             return "Curiosity/latest_photos"
-        case .Spirit:
+        case .spirit:
+            return "Spirit/latest_photos"
+        case .opportunitySearch(_):
+            return "Opportunity/latest_photos"
+        case .curiositySearch(_):
+            return "Curiosity/latest_photos"
+        case .spiritSearch(_):
             return "Spirit/latest_photos"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .Opportunity, .Curiosity, .Spirit:
+        case .opportunity, .curiosity, .spirit, .opportunitySearch(_), .curiositySearch(_), .spiritSearch(_):
             return .get
         }
     }
@@ -48,8 +57,10 @@ extension NasaAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .Opportunity, .Curiosity, .Spirit:
+        case .opportunity, .curiosity, .spirit:
             return .requestParameters(parameters: ["api_key" : APIKey], encoding: URLEncoding.queryString)
+        case .opportunitySearch(camera: let camera), .curiositySearch(camera: let camera), .spiritSearch(camera: let camera):
+            return .requestParameters(parameters: ["api_key" : APIKey, "camera" : camera], encoding: URLEncoding.queryString)
         }
     }
     

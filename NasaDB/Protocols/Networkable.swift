@@ -14,4 +14,7 @@ protocol Networkable {
     func fetchOppurtunityRover(completion: @escaping ([Photo]) -> () )
     func fetchCuriosityRover(completion: @escaping ([Photo]) -> () )
     func fetchSpiritRover(completion: @escaping ([Photo]) -> () )
+    func opportunityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
+    func curiosityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
+    func spiritRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
 }

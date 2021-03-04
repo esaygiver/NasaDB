@@ -34,7 +34,7 @@ final class OpportunityViewController: UIViewController {
 //MARK: - Network Request
 extension OpportunityViewController {
     func getsRoverData() {
-        networkManager.fetchOppurtunityRover { [weak self] photos in
+        networkManager.fetchOppurtunityRover() { [weak self] photos in
             guard let self = self else { return }
             self.opportunityData = photos
             DispatchQueue.main.async {
