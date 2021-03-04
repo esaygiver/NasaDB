@@ -122,8 +122,8 @@
 		849EF63025EFCEE90021170A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				849EF64825F036EF0021170A /* Opportunity VC */,
 				849EF64D25F0D2F40021170A /* Curiosity VC */,
+				849EF64825F036EF0021170A /* Opportunity VC */,
 				849EF65325F0D5D20021170A /* Spirit VC */,
 				849EF65025F0D4E50021170A /* PopUp VC */,
 			);

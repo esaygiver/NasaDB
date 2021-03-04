@@ -253,21 +253,44 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7CB-ox-7FB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfN-D5-0xw">
+                                        <rect key="frame" x="47" y="255" width="320" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="hfN-D5-0xw" firstAttribute="centerX" secondItem="7CB-ox-7FB" secondAttribute="centerX" id="Rh5-r2-7DK"/>
+                                    <constraint firstItem="hfN-D5-0xw" firstAttribute="centerY" secondItem="7CB-ox-7FB" secondAttribute="centerY" id="xY8-ts-yRH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="CIw-hA-rHk" secondAttribute="bottom" id="FKs-L0-fAf"/>
+                            <constraint firstItem="7CB-ox-7FB" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" id="IxZ-5I-hN4"/>
                             <constraint firstAttribute="trailing" secondItem="CIw-hA-rHk" secondAttribute="trailing" id="Nal-5t-ae5"/>
+                            <constraint firstItem="guX-1u-kmK" firstAttribute="bottom" secondItem="7CB-ox-7FB" secondAttribute="bottom" id="f6l-30-qHF"/>
+                            <constraint firstItem="7CB-ox-7FB" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" id="gfH-7G-Kep"/>
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" id="mQD-1Y-pDE"/>
+                            <constraint firstItem="guX-1u-kmK" firstAttribute="trailing" secondItem="7CB-ox-7FB" secondAttribute="trailing" id="oF3-Ip-QgW"/>
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" id="vBI-ul-aoE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="guX-1u-kmK"/>
                     </view>
                     <navigationItem key="navigationItem" title="NasaDB" id="stj-xb-YLw">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="dNs-7w-jJE"/>
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="dNs-7w-jJE">
+                            <connections>
+                                <action selector="filterButtonTapped:" destination="iVc-R5-mYi" id="cSP-XS-rU3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cameraPicker" destination="hfN-D5-0xw" id="Y9U-oU-e1p"/>
                         <outlet property="collectionView" destination="CIw-hA-rHk" id="nLl-oE-htd"/>
+                        <outlet property="emptyView" destination="7CB-ox-7FB" id="Vpb-kH-Isf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5QY-mA-f56" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
