@@ -25,7 +25,7 @@ struct DataResults: Codable {
     let photos: [Photo]
     
     private enum CodingKeys: String, CodingKey {
-        case photos = "photos"
+        case photos = "latest_photos"
     }
 }
 

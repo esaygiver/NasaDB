@@ -97,15 +97,15 @@
 		849EF61A25EFCBDE0021170A /* NasaDB */ = {
 			isa = PBXGroup;
 			children = (
-				849EF64125F01C030021170A /* Network */,
-				849EF63E25F01B410021170A /* Extension */,
-				849EF63725F015C70021170A /* Model */,
 				849EF63525EFCF350021170A /* App */,
-				849EF63025EFCEE90021170A /* Controller */,
+				849EF65425F0DA4F0021170A /* Protocols */,
+				849EF63E25F01B410021170A /* Extension */,
+				849EF64125F01C030021170A /* Network */,
+				849EF63725F015C70021170A /* Model */,
 				849EF62F25EFCEA20021170A /* View */,
+				849EF63025EFCEE90021170A /* Controller */,
 				849EF63625EFCF450021170A /* Supporting Files */,
 				849EF62925EFCBE00021170A /* Info.plist */,
-				849EF65425F0DA4F0021170A /* Protocols */,
 			);
 			path = NasaDB;
 			sourceTree = "<group>";
@@ -122,10 +122,10 @@
 		849EF63025EFCEE90021170A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				849EF64825F036EF0021170A /* Opportunity ViewController */,
-				849EF64D25F0D2F40021170A /* Curiosity ViewController */,
-				849EF65325F0D5D20021170A /* Spirit ViewController */,
-				849EF65025F0D4E50021170A /* PopUp ViewController */,
+				849EF64825F036EF0021170A /* Opportunity VC */,
+				849EF64D25F0D2F40021170A /* Curiosity VC */,
+				849EF65325F0D5D20021170A /* Spirit VC */,
+				849EF65025F0D4E50021170A /* PopUp VC */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -174,39 +174,39 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		849EF64825F036EF0021170A /* Opportunity ViewController */ = {
+		849EF64825F036EF0021170A /* Opportunity VC */ = {
 			isa = PBXGroup;
 			children = (
 				849EF63125EFCF140021170A /* OpportunityViewController.swift */,
 				849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */,
 			);
-			path = "Opportunity ViewController";
+			path = "Opportunity VC";
 			sourceTree = "<group>";
 		};
-		849EF64D25F0D2F40021170A /* Curiosity ViewController */ = {
+		849EF64D25F0D2F40021170A /* Curiosity VC */ = {
 			isa = PBXGroup;
 			children = (
 				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
 				849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */,
 			);
-			path = "Curiosity ViewController";
+			path = "Curiosity VC";
 			sourceTree = "<group>";
 		};
-		849EF65025F0D4E50021170A /* PopUp ViewController */ = {
+		849EF65025F0D4E50021170A /* PopUp VC */ = {
 			isa = PBXGroup;
 			children = (
 				849EF64B25F043770021170A /* PopUpViewController.swift */,
 			);
-			path = "PopUp ViewController";
+			path = "PopUp VC";
 			sourceTree = "<group>";
 		};
-		849EF65325F0D5D20021170A /* Spirit ViewController */ = {
+		849EF65325F0D5D20021170A /* Spirit VC */ = {
 			isa = PBXGroup;
 			children = (
 				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
 				849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */,
 			);
-			path = "Spirit ViewController";
+			path = "Spirit VC";
 			sourceTree = "<group>";
 		};
 		849EF65425F0DA4F0021170A /* Protocols */ = {

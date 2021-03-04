@@ -27,11 +27,11 @@ extension NasaAPI: TargetType {
     var path: String {
         switch self {
         case .Opportunity:
-            return "Opportunity/photos"
+            return "Opportunity/latest_photos"
         case .Curiosity:
-            return "Curiosity/photos"
+            return "Curiosity/latest_photos"
         case .Spirit:
-            return "Spirit/photos"
+            return "Spirit/latest_photos"
         }
     }
     
@@ -49,7 +49,7 @@ extension NasaAPI: TargetType {
     var task: Task {
         switch self {
         case .Opportunity, .Curiosity, .Spirit:
-            return .requestParameters(parameters: ["sol" : 1, "api_key" : APIKey], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["api_key" : APIKey], encoding: URLEncoding.queryString)
         }
     }
     
