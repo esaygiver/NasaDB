@@ -9,12 +9,9 @@
 import Foundation
 
 struct Camera: Codable {
-    let id: Int
     let name: String
-    let roverID: Int
-    let fullName: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, roverID = "rover_id", fullName = "full_name"
+        case name
     }
 }

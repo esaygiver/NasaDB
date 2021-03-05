@@ -50,6 +50,7 @@ final class OpportunityViewController: UIViewController {
     func setUpDelegations() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
     }
@@ -93,8 +94,8 @@ extension OpportunityViewController {
     }
 }
     
-//MARK: - CollectionView Delegate & DataSource
-extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//MARK: - CollectionView Delegate & DataSource & Flowlayout
+extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return opportunityData.count
@@ -116,6 +117,11 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = CGSize(width: view.frame.width, height: view.frame.height)
+        return size
     }
 }
 

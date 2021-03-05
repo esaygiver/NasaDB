@@ -53,6 +53,7 @@ final class CuriosityViewController: UIViewController {
     func setUpDelegatios() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
     }
@@ -95,8 +96,8 @@ extension CuriosityViewController {
     }
 }
 
-//MARK: - CollectionView Delegate & DataSource
-extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+//MARK: - CollectionView Delegate & DataSource & Flowlayout
+extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return curiosityData.count
@@ -118,7 +119,11 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
-
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = CGSize(width: view.frame.width, height: view.frame.height)
+        return size
     }
 }
 

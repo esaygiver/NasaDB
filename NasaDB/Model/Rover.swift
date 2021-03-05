@@ -9,10 +9,10 @@
 import Foundation
 
 struct Rover: Codable {
-    let id: Int
+    
     let name, landingDate, launchDate, status: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, status, landingDate = "landing_date", launchDate = "launch_date"
+        case name, status, landingDate = "landing_date", launchDate = "launch_date"
     }
 }

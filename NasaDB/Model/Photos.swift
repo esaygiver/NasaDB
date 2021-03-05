@@ -9,7 +9,6 @@
 import Foundation
 
 struct Photo: Codable {
-    let id, sol: Int
     let camera: Camera
     let image: String
     let earthDate: String
@@ -17,7 +16,7 @@ struct Photo: Codable {
     
 
     enum CodingKeys: String, CodingKey {
-        case id, sol, camera, rover, image = "img_src", earthDate = "earth_date"
+        case camera, rover, image = "img_src", earthDate = "earth_date"
     }
 }
 
@@ -25,7 +24,7 @@ struct DataResults: Codable {
     let photos: [Photo]
     
     private enum CodingKeys: String, CodingKey {
-        case photos = "latest_photos"
+        case photos = "photos"
     }
 }
 
