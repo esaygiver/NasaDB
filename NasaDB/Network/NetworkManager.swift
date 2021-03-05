@@ -13,8 +13,8 @@ final class NetworkManager: Networkable {
 
     public var provider = MoyaProvider<NasaAPI>(plugins: [NetworkLoggerPlugin()])
     
-    func fetchOppurtunityRover(completion: @escaping ([Photo]) -> ()) {
-        provider.request(.opportunity) { result in
+    func fetchOppurtunityRover(page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.opportunity(page: page)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -30,8 +30,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func fetchCuriosityRover(completion: @escaping ([Photo]) -> ()) {
-        provider.request(.curiosity) { result in
+    func fetchCuriosityRover(page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.curiosity(page: page)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -47,8 +47,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func fetchSpiritRover(completion: @escaping ([Photo]) -> ()) {
-        provider.request(.spirit) { result in
+    func fetchSpiritRover(page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.spirit(page: page)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -64,8 +64,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func opportunityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> ()) {
-        provider.request(.opportunitySearch(camera: camera)) { result in
+    func opportunityRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.opportunitySearch(camera: camera, page: page)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -80,8 +80,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func curiosityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> ()) {
-        provider.request(.curiositySearch(camera: camera)) { result in
+    func curiosityRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.curiositySearch(camera: camera, page: page)) { result in
             switch result {
             case let .success(response):
                 do {
@@ -96,8 +96,8 @@ final class NetworkManager: Networkable {
         }
     }
     
-    func spiritRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> ()) {
-        provider.request(.spiritSearch(camera: camera)) { result in
+    func spiritRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> ()) {
+        provider.request(.spiritSearch(camera: camera, page: page)) { result in
             switch result {
             case let .success(response):
                 do {

@@ -11,10 +11,10 @@ import Moya
 
 protocol Networkable {
     var provider: MoyaProvider<NasaAPI> { get }
-    func fetchOppurtunityRover(completion: @escaping ([Photo]) -> () )
-    func fetchCuriosityRover(completion: @escaping ([Photo]) -> () )
-    func fetchSpiritRover(completion: @escaping ([Photo]) -> () )
-    func opportunityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
-    func curiosityRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
-    func spiritRoverCameraSearch(camera: String, completion: @escaping ([Photo]) -> () )
+    func fetchOppurtunityRover(page: Int, completion: @escaping ([Photo]) -> () )
+    func fetchCuriosityRover(page: Int, completion: @escaping ([Photo]) -> () )
+    func fetchSpiritRover(page: Int, completion: @escaping ([Photo]) -> () )
+    func opportunityRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> () )
+    func curiosityRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> () )
+    func spiritRoverCameraSearch(camera: String, page: Int, completion: @escaping ([Photo]) -> () )
 }

@@ -144,7 +144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YoS-ye-bu2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1563.768115942029" y="-28.125"/>
+            <point key="canvasLocation" x="1410" y="-28"/>
         </scene>
         <!--NasaDB-->
         <scene sceneID="uuf-rc-LWs">
@@ -250,9 +250,32 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n3P-Qn-xVo">
+                                <rect key="frame" x="5" y="773" width="404" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="PPw-Hu-KjY"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="1"/>
+                                    <segment title="2"/>
+                                    <segment title="3"/>
+                                    <segment title="4"/>
+                                    <segment title="5"/>
+                                    <segment title="6"/>
+                                    <segment title="7"/>
+                                    <segment title="8"/>
+                                    <segment title="9"/>
+                                    <segment title="10"/>
+                                </segments>
+                                <connections>
+                                    <action selector="selectedPageIndex:" destination="iVc-R5-mYi" eventType="valueChanged" id="VEr-Fz-4sw"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="guX-1u-kmK" firstAttribute="trailing" secondItem="n3P-Qn-xVo" secondAttribute="trailing" constant="5" id="0Hf-TS-ahN"/>
+                            <constraint firstItem="n3P-Qn-xVo" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" constant="5" id="6jg-Al-uyQ"/>
                             <constraint firstAttribute="bottom" secondItem="CIw-hA-rHk" secondAttribute="bottom" constant="200" id="FKs-L0-fAf"/>
                             <constraint firstItem="7CB-ox-7FB" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" id="IxZ-5I-hN4"/>
                             <constraint firstAttribute="trailing" secondItem="CIw-hA-rHk" secondAttribute="trailing" id="Nal-5t-ae5"/>
@@ -265,6 +288,7 @@
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" id="mQD-1Y-pDE"/>
                             <constraint firstItem="guX-1u-kmK" firstAttribute="trailing" secondItem="7CB-ox-7FB" secondAttribute="trailing" id="oF3-Ip-QgW"/>
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" constant="150" id="vBI-ul-aoE"/>
+                            <constraint firstItem="guX-1u-kmK" firstAttribute="bottom" secondItem="n3P-Qn-xVo" secondAttribute="bottom" constant="10" id="xlh-05-YLO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="guX-1u-kmK"/>
                     </view>
@@ -280,11 +304,12 @@
                         <outlet property="collectionView" destination="CIw-hA-rHk" id="nLl-oE-htd"/>
                         <outlet property="filterView" destination="7CB-ox-7FB" id="tUM-Iq-kac"/>
                         <outlet property="noPhotoView" destination="6OD-Ud-Rtp" id="bH6-49-1WM"/>
+                        <outlet property="pageSegment" destination="n3P-Qn-xVo" id="Ek1-rU-Gr0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5QY-mA-f56" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="466.66666666666669" y="-683.03571428571422"/>
+            <point key="canvasLocation" x="467" y="-745"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Yg3-Jk-eZs">
@@ -322,7 +347,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ikr-0u-z50" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375.36231884057975" y="-683.03571428571422"/>
+            <point key="canvasLocation" x="-375" y="-745"/>
         </scene>
         <!--Opportunity-->
         <scene sceneID="Z6B-4k-9HK">
@@ -433,7 +458,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jEA-Ks-neX">
-                                <rect key="frame" x="0.0" y="238" width="414" height="375"/>
+                                <rect key="frame" x="0.0" y="238" width="414" height="458"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ucE-qU-9YH">
                                     <size key="itemSize" width="414" height="304"/>
@@ -443,7 +468,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OpportunityCell" id="qAX-wd-YhT" customClass="OpportunityCollectionViewCell" customModule="NasaDB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="35.5" width="414" height="304"/>
+                                        <rect key="frame" x="0.0" y="77" width="414" height="304"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Sst-dC-TPX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
@@ -480,7 +505,7 @@
                             <constraint firstItem="gbh-G4-sbh" firstAttribute="bottom" secondItem="auB-hQ-ShK" secondAttribute="bottom" id="i1a-Ei-0Em"/>
                             <constraint firstItem="P0y-TV-X8s" firstAttribute="top" secondItem="gbh-G4-sbh" secondAttribute="top" id="q3A-RX-1Ay"/>
                             <constraint firstItem="gbh-G4-sbh" firstAttribute="bottom" secondItem="P0y-TV-X8s" secondAttribute="bottom" id="qXE-Cw-AGF"/>
-                            <constraint firstItem="gbh-G4-sbh" firstAttribute="bottom" secondItem="jEA-Ks-neX" secondAttribute="bottom" constant="200" id="z5k-GC-Yd0"/>
+                            <constraint firstAttribute="bottom" secondItem="jEA-Ks-neX" secondAttribute="bottom" constant="200" id="z5k-GC-Yd0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gbh-G4-sbh"/>
                     </view>
@@ -573,7 +598,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mNP-Qt-97Z">
-                                <rect key="frame" x="0.0" y="238" width="414" height="375"/>
+                                <rect key="frame" x="0.0" y="238" width="414" height="458"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ptg-jF-lOd">
                                     <size key="itemSize" width="414" height="304"/>
@@ -583,7 +608,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpiritCell" id="frz-kp-reh" customClass="SpiritCollectionViewCell" customModule="NasaDB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="35.5" width="414" height="304"/>
+                                        <rect key="frame" x="0.0" y="77" width="414" height="304"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="h7f-UY-B3h">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
@@ -616,7 +641,7 @@
                             <constraint firstItem="mNP-Qt-97Z" firstAttribute="top" secondItem="iks-id-ARf" secondAttribute="top" constant="150" id="QeN-Aj-Eeg"/>
                             <constraint firstItem="ov4-uz-GhM" firstAttribute="leading" secondItem="iks-id-ARf" secondAttribute="leading" id="cKT-Wi-GVO"/>
                             <constraint firstAttribute="trailing" secondItem="mNP-Qt-97Z" secondAttribute="trailing" id="dV5-km-6ok"/>
-                            <constraint firstItem="iks-id-ARf" firstAttribute="bottom" secondItem="mNP-Qt-97Z" secondAttribute="bottom" constant="200" id="h1o-xu-Yyf"/>
+                            <constraint firstAttribute="bottom" secondItem="mNP-Qt-97Z" secondAttribute="bottom" constant="200" id="h1o-xu-Yyf"/>
                             <constraint firstItem="iks-id-ARf" firstAttribute="trailing" secondItem="ov4-uz-GhM" secondAttribute="trailing" id="h9O-pE-Frm"/>
                             <constraint firstItem="ov4-uz-GhM" firstAttribute="top" secondItem="iks-id-ARf" secondAttribute="top" id="kJ4-ox-bnz"/>
                             <constraint firstItem="iks-id-ARf" firstAttribute="bottom" secondItem="FO3-7X-V79" secondAttribute="bottom" id="oTa-Cf-Ia9"/>

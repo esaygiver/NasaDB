@@ -10,12 +10,12 @@ import Foundation
 import Moya
 
 enum NasaAPI {
-    case opportunity
-    case curiosity
-    case spirit
-    case opportunitySearch(camera: String)
-    case curiositySearch(camera: String)
-    case spiritSearch(camera: String)
+    case opportunity(page: Int)
+    case curiosity(page: Int)
+    case spirit(page: Int)
+    case opportunitySearch(camera: String, page: Int)
+    case curiositySearch(camera: String, page: Int)
+    case spiritSearch(camera: String, page: Int)
 }
 
 fileprivate let APIKey = "LUL419Ui2W9PchaVhajYSPTsq3FSH5JF50AZNhl7"
@@ -29,24 +29,24 @@ extension NasaAPI: TargetType {
     
     var path: String {
         switch self {
-        case .opportunity:
+        case .opportunity(_):
             return "Opportunity/photos"
-        case .curiosity:
+        case .curiosity(_):
             return "Curiosity/photos"
-        case .spirit:
+        case .spirit(_):
             return "Spirit/photos"
-        case .opportunitySearch(_):
+        case .opportunitySearch(_, _):
             return "Opportunity/photos"
-        case .curiositySearch(_):
+        case .curiositySearch(_, _):
             return "Curiosity/photos"
-        case .spiritSearch(_):
+        case .spiritSearch(_, _):
             return "Spirit/photos"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .opportunity, .curiosity, .spirit, .opportunitySearch(_), .curiositySearch(_), .spiritSearch(_):
+        case .opportunity(_), .curiosity(_), .spirit(_), .opportunitySearch(_, _), .curiositySearch(_, _), .spiritSearch(_, _):
             return .get
         }
     }
@@ -57,10 +57,20 @@ extension NasaAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .opportunity, .curiosity, .spirit:
-            return .requestParameters(parameters: ["api_key" : APIKey, "sol" : 1000], encoding: URLEncoding.queryString)
-        case .opportunitySearch(camera: let camera), .curiositySearch(camera: let camera), .spiritSearch(camera: let camera):
-            return .requestParameters(parameters: ["api_key" : APIKey, "sol" : 1000, "camera" : camera], encoding: URLEncoding.queryString)
+        case .opportunity(page: let page),
+             .curiosity(page: let page),
+             .spirit(page: let page):
+            return .requestParameters(parameters: ["api_key" : APIKey,
+                                                   "sol" : 1000,
+                                                   "page" : page], encoding: URLEncoding.queryString)
+            
+        case .opportunitySearch(camera: let camera, page: let page),
+             .curiositySearch(camera: let camera, page: let page),
+             .spiritSearch(camera: let camera, page: let page):
+            return .requestParameters(parameters: ["api_key" : APIKey,
+                                                   "sol" : 1000,
+                                                   "camera" : camera,
+                                                   "page" : page], encoding: URLEncoding.queryString)
         }
     }
     

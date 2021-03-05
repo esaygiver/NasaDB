@@ -18,25 +18,30 @@ final class CuriosityViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var noPhotoView: UIView!
+    @IBOutlet weak var pageSegment: UISegmentedControl!
     @IBOutlet weak var cameraPicker: UIPickerView!
     
     lazy var curiosityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
     lazy var cameraQuery: String = ""
+    lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
             if screenState == .searching {
                 collectionView.isHidden = true
+                pageSegment.isHidden = true
                 noPhotoView.isHidden = true
                 filterView.isHidden = false
             } else if screenState == .loaded {
                 filterView.isHidden = true
+                pageSegment.isHidden = false
                 noPhotoView.isHidden = true
                 collectionView.isHidden = false
             } else {
                 filterView.isHidden = true
+                pageSegment.isHidden = true
                 collectionView.isHidden = true
                 noPhotoView.isHidden = false
             }
@@ -47,7 +52,7 @@ final class CuriosityViewController: UIViewController {
         super.viewDidLoad()
         
         setUpDelegatios()
-        getsRoverData()
+        getsRoverData(page: selectedPage)
     }
     
     func setUpDelegatios() {
@@ -56,22 +61,28 @@ final class CuriosityViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
+        
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
-            fetchCameraTypeOfCuriosityRover(camera: cameraQuery)
+            fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: selectedPage)
             screenState = .loaded
         } else {
             screenState = .searching
         }
     }
+    @IBAction func selectedPageIndex(_ sender: UISegmentedControl) {
+        selectedPage = Int(pageSegment.titleForSegment(at: pageSegment.selectedSegmentIndex)!)!
+        getsRoverData(page: selectedPage)
+    }
+    
 }
 
 //MARK: - Network Request
 extension CuriosityViewController {
-    func getsRoverData() {
-        networkManager.fetchCuriosityRover { [weak self] photos in
+    func getsRoverData(page: Int) {
+        networkManager.fetchCuriosityRover(page: page) { [weak self] photos in
             guard let self = self else { return }
             self.curiosityData = photos
             DispatchQueue.main.async {
@@ -80,8 +91,8 @@ extension CuriosityViewController {
         }
     }
     
-    func fetchCameraTypeOfCuriosityRover(camera: String) {
-        networkManager.curiosityRoverCameraSearch(camera: camera) { [weak self] photos in
+    func fetchCameraTypeOfCuriosityRover(camera: String, page: Int) {
+        networkManager.curiosityRoverCameraSearch(camera: camera, page: page) { [weak self] photos in
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
@@ -145,3 +156,5 @@ extension CuriosityViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         cameraQuery = cameraTypes[row]
     }
 }
+
+

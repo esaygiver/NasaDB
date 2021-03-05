@@ -21,6 +21,7 @@ final class OpportunityViewController: UIViewController {
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
     lazy var cameraQuery: String = ""
+    lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
@@ -44,7 +45,7 @@ final class OpportunityViewController: UIViewController {
         super.viewDidLoad()
 
         setUpDelegations()
-        getsRoverData()
+        getsRoverData(page: selectedPage)
     }
     
     func setUpDelegations() {
@@ -57,7 +58,7 @@ final class OpportunityViewController: UIViewController {
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
-            fetchCameraTypeOfOpportunityRover(camera: cameraQuery)
+            fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: selectedPage)
             screenState = .loaded
         } else {
             screenState = .searching
@@ -68,8 +69,8 @@ final class OpportunityViewController: UIViewController {
 
 //MARK: - Network Request
 extension OpportunityViewController {
-    func getsRoverData() {
-        networkManager.fetchOppurtunityRover() { [weak self] photos in
+    func getsRoverData(page: Int) {
+        networkManager.fetchOppurtunityRover(page: page) { [weak self] photos in
             guard let self = self else { return }
             self.opportunityData = photos
             DispatchQueue.main.async {
@@ -78,8 +79,8 @@ extension OpportunityViewController {
         }
     }
     
-    func fetchCameraTypeOfOpportunityRover(camera: String) {
-        networkManager.opportunityRoverCameraSearch(camera: camera) { [weak self] photos in
+    func fetchCameraTypeOfOpportunityRover(camera: String, page: Int) {
+        networkManager.opportunityRoverCameraSearch(camera: camera, page: page) { [weak self] photos in
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty

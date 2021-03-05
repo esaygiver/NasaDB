@@ -20,6 +20,7 @@ final class SpiritViewController: UIViewController {
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
     lazy var cameraQuery: String = ""
+    lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
@@ -43,7 +44,7 @@ final class SpiritViewController: UIViewController {
         super.viewDidLoad()
 
         setUpDelegatios()
-        getsRoverData()
+        getsRoverData(page: selectedPage)
     }
     
     func setUpDelegatios() {
@@ -57,7 +58,7 @@ final class SpiritViewController: UIViewController {
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
             screenState = .loaded
-            fetchCameraTypeOfSpiritRover(camera: cameraQuery)
+            fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: selectedPage)
         } else {
             screenState = .searching
         }
@@ -66,8 +67,8 @@ final class SpiritViewController: UIViewController {
 
 //MARK: - Network Request
 extension SpiritViewController {
-    func getsRoverData() {
-        networkManager.fetchSpiritRover { [weak self] photos in
+    func getsRoverData(page: Int) {
+        networkManager.fetchSpiritRover(page: page) { [weak self] photos in
             guard let self = self else { return }
             self.spiritData = photos
             DispatchQueue.main.async {
@@ -76,8 +77,8 @@ extension SpiritViewController {
         }
     }
     
-    func fetchCameraTypeOfSpiritRover(camera: String) {
-        networkManager.spiritRoverCameraSearch(camera: camera) { [weak self] photos in
+    func fetchCameraTypeOfSpiritRover(camera: String, page: Int) {
+        networkManager.spiritRoverCameraSearch(camera: camera, page: page) { [weak self] photos in
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
