@@ -240,8 +240,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="closeButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="Rio-gW-MWK"/>
-                                            <action selector="searchButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="hua-PB-vXJ"/>
+                                            <action selector="closeButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="H6v-Cr-tAK"/>
                                         </connections>
                                     </button>
                                 </subviews>

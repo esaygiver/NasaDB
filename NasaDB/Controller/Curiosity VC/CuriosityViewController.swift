@@ -27,7 +27,7 @@ final class CuriosityViewController: UIViewController {
     lazy var curiosityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = "FHAZ"
+    lazy var cameraQuery: String = ""
     lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
@@ -86,8 +86,9 @@ final class CuriosityViewController: UIViewController {
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
-           screenState = .loaded
-       }
+        screenState = .loaded
+//        getsRoverData(page: Int("1,\(selectedPage)") ?? 1)
+    }
     
 }
 
@@ -101,7 +102,7 @@ extension CuriosityViewController {
                 self.activityIndicator.isHidden = true
             } else {
                 self.curiosityData.append(contentsOf: photos)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                     self.collectionView.reloadData()
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.hidesWhenStopped = true
