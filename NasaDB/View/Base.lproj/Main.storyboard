@@ -107,10 +107,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eph-Lf-Fi4">
-                                <rect key="frame" x="172" y="585.5" width="70" height="30"/>
+                                <rect key="frame" x="162" y="585.5" width="90" height="30"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="6sY-Ff-wTW"/>
+                                    <constraint firstAttribute="width" constant="90" id="6sY-Ff-wTW"/>
                                     <constraint firstAttribute="height" constant="30" id="mCW-Lm-SOP"/>
                                 </constraints>
                                 <state key="normal" title="Close" image="return" catalog="system">
@@ -184,10 +184,17 @@
                                             <constraint firstItem="fEp-sl-Y9P" firstAttribute="leading" secondItem="Uou-6h-zUZ" secondAttribute="leading" constant="8" id="xD8-5S-UOW"/>
                                         </constraints>
                                     </view>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="OXG-lF-Fq4">
+                                        <rect key="frame" x="188.5" y="613" width="37" height="37"/>
+                                        <color key="color" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="OXG-lF-Fq4" secondAttribute="bottom" constant="75" id="2Wr-Dy-BkN"/>
                                     <constraint firstItem="Uou-6h-zUZ" firstAttribute="centerX" secondItem="6OD-Ud-Rtp" secondAttribute="centerX" id="QZw-wl-w6q"/>
+                                    <constraint firstAttribute="trailing" secondItem="OXG-lF-Fq4" secondAttribute="trailing" constant="188.5" id="fxJ-hY-PRl"/>
+                                    <constraint firstItem="OXG-lF-Fq4" firstAttribute="leading" secondItem="6OD-Ud-Rtp" secondAttribute="leading" constant="188.5" id="mSV-dJ-JeT"/>
                                     <constraint firstItem="Uou-6h-zUZ" firstAttribute="centerY" secondItem="6OD-Ud-Rtp" secondAttribute="centerY" id="nRj-bI-dCs"/>
                                 </constraints>
                             </view>
@@ -206,17 +213,52 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0z-Iv-hyA">
+                                        <rect key="frame" x="144.5" y="477.5" width="125" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="N5i-H9-yUk"/>
+                                            <constraint firstAttribute="width" constant="125" id="ueY-A0-A0x"/>
+                                        </constraints>
+                                        <state key="normal" title="Search Photos">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="0CC-6R-g9U"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bAw-P4-1cP">
+                                        <rect key="frame" x="144.5" y="522.5" width="125" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="SnL-6T-hDw"/>
+                                            <constraint firstAttribute="width" constant="125" id="dca-PE-Urf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Close" image="xmark" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="Rio-gW-MWK"/>
+                                            <action selector="searchButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="hua-PB-vXJ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="G0z-Iv-hyA" firstAttribute="top" secondItem="hfN-D5-0xw" secondAttribute="bottom" constant="7" id="54L-Zl-gHv"/>
+                                    <constraint firstItem="G0z-Iv-hyA" firstAttribute="centerX" secondItem="7CB-ox-7FB" secondAttribute="centerX" id="9qI-xl-wnh"/>
+                                    <constraint firstItem="bAw-P4-1cP" firstAttribute="top" secondItem="G0z-Iv-hyA" secondAttribute="bottom" constant="15" id="BrX-8b-Aek"/>
                                     <constraint firstItem="hfN-D5-0xw" firstAttribute="centerX" secondItem="7CB-ox-7FB" secondAttribute="centerX" id="Rh5-r2-7DK"/>
+                                    <constraint firstItem="bAw-P4-1cP" firstAttribute="centerX" secondItem="7CB-ox-7FB" secondAttribute="centerX" id="fqA-a2-Raa"/>
                                     <constraint firstItem="hfN-D5-0xw" firstAttribute="top" secondItem="308-dX-0JC" secondAttribute="bottom" id="fzq-5K-g0l"/>
                                     <constraint firstAttribute="trailing" secondItem="308-dX-0JC" secondAttribute="trailing" id="oDH-cz-We8"/>
                                     <constraint firstItem="308-dX-0JC" firstAttribute="leading" secondItem="7CB-ox-7FB" secondAttribute="leading" id="xM6-6t-f0p"/>
                                     <constraint firstItem="hfN-D5-0xw" firstAttribute="centerY" secondItem="7CB-ox-7FB" secondAttribute="centerY" id="xY8-ts-yRH"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CIw-hA-rHk">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CIw-hA-rHk">
                                 <rect key="frame" x="0.0" y="238" width="414" height="458"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="FIU-Kw-MeJ">
@@ -233,7 +275,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-oh-nTm">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l3H-oh-nTm">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
                                                 </imageView>
                                             </subviews>
@@ -250,32 +292,9 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="n3P-Qn-xVo">
-                                <rect key="frame" x="5" y="773" width="404" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="PPw-Hu-KjY"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="1"/>
-                                    <segment title="2"/>
-                                    <segment title="3"/>
-                                    <segment title="4"/>
-                                    <segment title="5"/>
-                                    <segment title="6"/>
-                                    <segment title="7"/>
-                                    <segment title="8"/>
-                                    <segment title="9"/>
-                                    <segment title="10"/>
-                                </segments>
-                                <connections>
-                                    <action selector="selectedPageIndex:" destination="iVc-R5-mYi" eventType="valueChanged" id="VEr-Fz-4sw"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="guX-1u-kmK" firstAttribute="trailing" secondItem="n3P-Qn-xVo" secondAttribute="trailing" constant="5" id="0Hf-TS-ahN"/>
-                            <constraint firstItem="n3P-Qn-xVo" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" constant="5" id="6jg-Al-uyQ"/>
                             <constraint firstAttribute="bottom" secondItem="CIw-hA-rHk" secondAttribute="bottom" constant="200" id="FKs-L0-fAf"/>
                             <constraint firstItem="7CB-ox-7FB" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" id="IxZ-5I-hN4"/>
                             <constraint firstAttribute="trailing" secondItem="CIw-hA-rHk" secondAttribute="trailing" id="Nal-5t-ae5"/>
@@ -288,7 +307,6 @@
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="leading" secondItem="guX-1u-kmK" secondAttribute="leading" id="mQD-1Y-pDE"/>
                             <constraint firstItem="guX-1u-kmK" firstAttribute="trailing" secondItem="7CB-ox-7FB" secondAttribute="trailing" id="oF3-Ip-QgW"/>
                             <constraint firstItem="CIw-hA-rHk" firstAttribute="top" secondItem="guX-1u-kmK" secondAttribute="top" constant="150" id="vBI-ul-aoE"/>
-                            <constraint firstItem="guX-1u-kmK" firstAttribute="bottom" secondItem="n3P-Qn-xVo" secondAttribute="bottom" constant="10" id="xlh-05-YLO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="guX-1u-kmK"/>
                     </view>
@@ -300,16 +318,19 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="OXG-lF-Fq4" id="ot2-jf-hv8"/>
                         <outlet property="cameraPicker" destination="hfN-D5-0xw" id="Y9U-oU-e1p"/>
+                        <outlet property="closeButton" destination="bAw-P4-1cP" id="JGe-HU-hoE"/>
                         <outlet property="collectionView" destination="CIw-hA-rHk" id="nLl-oE-htd"/>
+                        <outlet property="filterButton" destination="dNs-7w-jJE" id="ZYs-Ms-geR"/>
                         <outlet property="filterView" destination="7CB-ox-7FB" id="tUM-Iq-kac"/>
                         <outlet property="noPhotoView" destination="6OD-Ud-Rtp" id="bH6-49-1WM"/>
-                        <outlet property="pageSegment" destination="n3P-Qn-xVo" id="Ek1-rU-Gr0"/>
+                        <outlet property="searchButton" destination="G0z-Iv-hyA" id="hMF-4f-i6T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5QY-mA-f56" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="467" y="-745"/>
+            <point key="canvasLocation" x="466.66666666666669" y="-745.3125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Yg3-Jk-eZs">
@@ -447,11 +468,28 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byz-Ev-LIN">
+                                        <rect key="frame" x="144.5" y="477.5" width="125" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="110-Mn-HOY"/>
+                                            <constraint firstAttribute="height" constant="30" id="T2d-w6-KPB"/>
+                                        </constraints>
+                                        <state key="normal" title="Search Photos">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="IBO-G6-QUw"/>
+                                            <action selector="searchButtonTapped:" destination="YG2-Ix-e4u" eventType="touchUpInside" id="KVv-1m-guN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="sx1-gS-Gsa" firstAttribute="top" secondItem="CRQ-AL-myM" secondAttribute="bottom" id="46W-S4-K0X"/>
+                                    <constraint firstItem="byz-Ev-LIN" firstAttribute="top" secondItem="sx1-gS-Gsa" secondAttribute="bottom" constant="7" id="Qrd-P8-sje"/>
                                     <constraint firstItem="CRQ-AL-myM" firstAttribute="leading" secondItem="P0y-TV-X8s" secondAttribute="leading" id="SRz-iH-0Jl"/>
+                                    <constraint firstItem="byz-Ev-LIN" firstAttribute="centerX" secondItem="P0y-TV-X8s" secondAttribute="centerX" id="ZR9-GU-GS8"/>
                                     <constraint firstItem="sx1-gS-Gsa" firstAttribute="centerY" secondItem="P0y-TV-X8s" secondAttribute="centerY" id="dbr-Mz-8SQ"/>
                                     <constraint firstAttribute="trailing" secondItem="CRQ-AL-myM" secondAttribute="trailing" id="hwY-PP-xlN"/>
                                     <constraint firstItem="sx1-gS-Gsa" firstAttribute="centerX" secondItem="P0y-TV-X8s" secondAttribute="centerX" id="txa-Wf-yPy"/>
@@ -521,6 +559,7 @@
                         <outlet property="collectionView" destination="jEA-Ks-neX" id="PRs-oK-wtW"/>
                         <outlet property="filterView" destination="P0y-TV-X8s" id="gb5-fV-0uf"/>
                         <outlet property="noPhotoView" destination="auB-hQ-ShK" id="JaB-3V-cJd"/>
+                        <outlet property="searchButton" destination="byz-Ev-LIN" id="v7x-8y-33Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T7o-AU-iz0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -587,12 +626,30 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="urS-Zu-wUf">
+                                        <rect key="frame" x="144.5" y="477.5" width="125" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="125" id="fqe-EY-dox"/>
+                                            <constraint firstAttribute="height" constant="30" id="mqN-fX-36J"/>
+                                        </constraints>
+                                        <state key="normal" title="Search Photos">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButtonTapped:" destination="YG2-Ix-e4u" eventType="touchUpInside" id="KcA-tK-Tyc"/>
+                                            <action selector="searchButtonTapped:" destination="iVc-R5-mYi" eventType="touchUpInside" id="O8s-2D-7je"/>
+                                            <action selector="searchButtonTapped:" destination="vkO-JB-8Ed" eventType="touchUpInside" id="u6P-9d-xfr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="kcA-QK-uKO" secondAttribute="trailing" id="4H5-oN-CXU"/>
                                     <constraint firstItem="erH-WO-rzZ" firstAttribute="centerY" secondItem="ov4-uz-GhM" secondAttribute="centerY" id="Bqt-gT-Y4f"/>
+                                    <constraint firstItem="urS-Zu-wUf" firstAttribute="centerX" secondItem="ov4-uz-GhM" secondAttribute="centerX" id="Drg-B4-t4D"/>
                                     <constraint firstItem="erH-WO-rzZ" firstAttribute="centerX" secondItem="ov4-uz-GhM" secondAttribute="centerX" id="Lyn-ER-RF7"/>
+                                    <constraint firstItem="urS-Zu-wUf" firstAttribute="top" secondItem="erH-WO-rzZ" secondAttribute="bottom" constant="7" id="XjC-v4-o4d"/>
                                     <constraint firstItem="erH-WO-rzZ" firstAttribute="top" secondItem="kcA-QK-uKO" secondAttribute="bottom" id="ZHD-so-kbZ"/>
                                     <constraint firstItem="kcA-QK-uKO" firstAttribute="leading" secondItem="ov4-uz-GhM" secondAttribute="leading" id="m3B-dO-E12"/>
                                 </constraints>
@@ -661,6 +718,7 @@
                         <outlet property="collectionView" destination="mNP-Qt-97Z" id="kIg-dP-hYc"/>
                         <outlet property="filterView" destination="ov4-uz-GhM" id="SHQ-3G-Ltp"/>
                         <outlet property="noPhotoView" destination="FO3-7X-V79" id="t43-I2-YWy"/>
+                        <outlet property="searchButton" destination="urS-Zu-wUf" id="cSb-Yb-vbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVf-RW-iLT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -670,5 +728,6 @@
     </scenes>
     <resources>
         <image name="return" catalog="system" width="128" height="101"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

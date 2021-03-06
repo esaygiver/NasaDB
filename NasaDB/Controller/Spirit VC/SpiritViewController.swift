@@ -15,24 +15,28 @@ final class SpiritViewController: UIViewController {
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var noPhotoView: UIView!
     @IBOutlet weak var cameraPicker: UIPickerView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     lazy var spiritData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = ""
+    lazy var cameraQuery: String = "FHAZ"
+    // for default case
     lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
-            if screenState == .searching {
+            switch screenState {
+            case .searching:
                 collectionView.isHidden = true
                 noPhotoView.isHidden = true
                 filterView.isHidden = false
-            } else if screenState == .loaded {
+            case .loaded:
                 filterView.isHidden = true
                 noPhotoView.isHidden = true
                 collectionView.isHidden = false
-            } else {
+            default:
                 filterView.isHidden = true
                 collectionView.isHidden = true
                 noPhotoView.isHidden = false
@@ -53,16 +57,22 @@ final class SpiritViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
+        getCurvyButton(searchButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
             screenState = .loaded
-            fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: selectedPage)
         } else {
             screenState = .searching
         }
     }
+    
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: selectedPage)
+        screenState = .loaded
+    }
+    
 }
 
 //MARK: - Network Request
@@ -120,7 +130,18 @@ extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let size = CGSize(width: view.frame.width, height: view.frame.height)
         return size
     }
-}
+    
+    //MARK: - Pagination
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            if indexPath.row == self.spiritData.count - 1 {
+                activityIndicator.startAnimating()
+                selectedPage = selectedPage + 1
+                activityIndicator.stopAnimating()
+                fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: 2)
+            }
+        }
+    }
+
 
 //MARK: - CameraPicker Delegate
 extension SpiritViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -138,6 +159,13 @@ extension SpiritViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         cameraQuery = cameraTypes[row]
+    }
+}
+
+//MARK: - Button with curves
+extension SpiritViewController {
+    func getCurvyButton(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.size.height / 2
     }
 }
 

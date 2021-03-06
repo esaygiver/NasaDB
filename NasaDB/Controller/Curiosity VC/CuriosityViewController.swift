@@ -18,32 +18,38 @@ final class CuriosityViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var noPhotoView: UIView!
-    @IBOutlet weak var pageSegment: UISegmentedControl!
     @IBOutlet weak var cameraPicker: UIPickerView!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     lazy var curiosityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = ""
+    lazy var cameraQuery: String = "FHAZ"
     lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
-            if screenState == .searching {
+            switch screenState {
+            case .searching:
                 collectionView.isHidden = true
-                pageSegment.isHidden = true
                 noPhotoView.isHidden = true
                 filterView.isHidden = false
-            } else if screenState == .loaded {
+                filterButton.title = ""
+            case .loaded:
                 filterView.isHidden = true
-                pageSegment.isHidden = false
-                noPhotoView.isHidden = true
+                noPhotoView.isHidden = false
                 collectionView.isHidden = false
-            } else {
+                filterButton.title = "Filter"
+            case .empty:
                 filterView.isHidden = true
-                pageSegment.isHidden = true
                 collectionView.isHidden = true
                 noPhotoView.isHidden = false
+                filterButton.title = "Filter"
+            case .none:
+                print("we got an issue about changing states of screen!")
             }
         }
     }
@@ -51,8 +57,10 @@ final class CuriosityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        screenState = .loaded
         setUpDelegatios()
         getsRoverData(page: selectedPage)
+        
     }
     
     func setUpDelegatios() {
@@ -61,21 +69,25 @@ final class CuriosityViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
+        getCurvyButton(searchButton)
+        getCurvyButton(closeButton)
         
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
-        if screenState == .searching {
-            fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: selectedPage)
-            screenState = .loaded
-        } else {
+        if screenState == .loaded || screenState == .empty {
             screenState = .searching
         }
     }
-    @IBAction func selectedPageIndex(_ sender: UISegmentedControl) {
-        selectedPage = Int(pageSegment.titleForSegment(at: pageSegment.selectedSegmentIndex)!)!
-        getsRoverData(page: selectedPage)
+    
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int("1,\(selectedPage)") ?? 1)
+        screenState = .loaded
     }
+    
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+           screenState = .loaded
+       }
     
 }
 
@@ -84,12 +96,20 @@ extension CuriosityViewController {
     func getsRoverData(page: Int) {
         networkManager.fetchCuriosityRover(page: page) { [weak self] photos in
             guard let self = self else { return }
-            self.curiosityData = photos
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            if photos.isEmpty {
+                self.screenState = .empty
+                self.activityIndicator.isHidden = true
+            } else {
+                self.curiosityData.append(contentsOf: photos)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                    self.collectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
+                })
             }
         }
     }
+    
     
     func fetchCameraTypeOfCuriosityRover(camera: String, page: Int) {
         networkManager.curiosityRoverCameraSearch(camera: camera, page: page) { [weak self] photos in
@@ -101,6 +121,7 @@ extension CuriosityViewController {
                 self.screenState = .loaded
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                
                 }
             }
         }
@@ -136,6 +157,16 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
         let size = CGSize(width: view.frame.width, height: view.frame.height)
         return size
     }
+    
+    //MARK: - Pagination
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.curiosityData.count - 1 {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            selectedPage += 1
+            getsRoverData(page: selectedPage)
+        }
+    }
 }
 
 //MARK: - CameraPicker Delegate
@@ -154,6 +185,13 @@ extension CuriosityViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         cameraQuery = cameraTypes[row]
+    }
+}
+
+//MARK: - Button with curves
+extension CuriosityViewController {
+    func getCurvyButton(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.size.height / 2
     }
 }
 

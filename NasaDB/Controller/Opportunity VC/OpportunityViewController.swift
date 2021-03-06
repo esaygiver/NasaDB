@@ -10,12 +10,14 @@ import UIKit
 import Moya
 
 final class OpportunityViewController: UIViewController {
-
+    
     //MARK: - IBOutlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var noPhotoView: UIView!
     @IBOutlet weak var cameraPicker: UIPickerView!
+    @IBOutlet weak var searchButton: UIButton!
+    
     
     lazy var opportunityData = [Photo]()
     public var networkManager = NetworkManager()
@@ -25,25 +27,26 @@ final class OpportunityViewController: UIViewController {
     
     var screenState: CameraListState? {
         didSet {
-            if screenState == .searching {
+            switch screenState {
+            case .searching:
                 collectionView.isHidden = true
                 noPhotoView.isHidden = true
                 filterView.isHidden = false
-            } else if screenState == .loaded {
-                collectionView.isHidden = false
+            case .loaded:
                 filterView.isHidden = true
                 noPhotoView.isHidden = true
-            } else {
-                noPhotoView.isHidden = false
+                collectionView.isHidden = false
+            default:
                 filterView.isHidden = true
                 collectionView.isHidden = true
+                noPhotoView.isHidden = false
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpDelegations()
         getsRoverData(page: selectedPage)
     }
@@ -54,18 +57,23 @@ final class OpportunityViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
+        getCurvyButton(searchButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .searching {
-            fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: selectedPage)
             screenState = .loaded
         } else {
             screenState = .searching
         }
     }
+    
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: selectedPage)
+        screenState = .loaded
+        
+    }
 }
-
 
 //MARK: - Network Request
 extension OpportunityViewController {
@@ -94,7 +102,7 @@ extension OpportunityViewController {
         }
     }
 }
-    
+
 //MARK: - CollectionView Delegate & DataSource & Flowlayout
 extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -142,5 +150,12 @@ extension OpportunityViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         cameraQuery = cameraTypes[row]
+    }
+}
+
+//MARK: - Button with curves
+extension OpportunityViewController {
+    func getCurvyButton(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.size.height / 2
     }
 }
