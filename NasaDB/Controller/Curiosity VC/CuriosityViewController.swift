@@ -8,10 +8,6 @@
 
 import UIKit
 
-enum CameraListState {
-    case searching, loaded, empty
-}
-
 final class CuriosityViewController: UIViewController {
     
     //MARK: - IBOutlets
@@ -21,14 +17,18 @@ final class CuriosityViewController: UIViewController {
     @IBOutlet weak var cameraPicker: UIPickerView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var searchingPage: UILabel!
+    @IBOutlet weak var pageStepper: UIStepper!
+    
     lazy var curiosityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = ""
-    lazy var selectedPage: Int = 1
+    lazy var cameraQuery: String = "FHAZ"
+    // For default case
+    lazy var nextPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
@@ -59,7 +59,7 @@ final class CuriosityViewController: UIViewController {
         
         screenState = .loaded
         setUpDelegatios()
-        getsRoverData(page: selectedPage)
+        getsRoverData(page: nextPage)
         
     }
     
@@ -71,6 +71,7 @@ final class CuriosityViewController: UIViewController {
         cameraPicker.dataSource = self
         getCurvyButton(searchButton)
         getCurvyButton(closeButton)
+        getCurvyButton(seeAllButton)
         
     }
     
@@ -80,16 +81,26 @@ final class CuriosityViewController: UIViewController {
         }
     }
     
+    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
+        searchingPage.text = Int(pageStepper.value).description
+    }
+    
+    @IBAction func seeAllButtonTapped(_ sender: UIButton) {
+        curiosityData = []
+        getsRoverData(page: 1)
+        screenState = .loaded
+    }
+    
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int("1,\(selectedPage)") ?? 1)
+        fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int(searchingPage.text!)!)
+        // page 1 added because there might be no photos in page x about user's camera selection
         screenState = .loaded
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         screenState = .loaded
-//        getsRoverData(page: Int("1,\(selectedPage)") ?? 1)
     }
-    
+
 }
 
 //MARK: - Network Request
@@ -164,8 +175,8 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
         if indexPath.row == self.curiosityData.count - 1 {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            selectedPage += 1
-            getsRoverData(page: selectedPage)
+            nextPage += 1
+            getsRoverData(page: nextPage)
         }
     }
 }

@@ -20,7 +20,6 @@ final class NetworkManager: Networkable {
                 do {
                     let results = try JSONDecoder().decode(DataResults.self, from: response.data)
                     completion(results.photos)
-                    print(results.photos.first?.earthDate)
                 } catch let error {
                     dump(error)
                 }
@@ -37,7 +36,6 @@ final class NetworkManager: Networkable {
                 do {
                     let results = try JSONDecoder().decode(DataResults.self, from: response.data)
                     completion(results.photos)
-                    print(results.photos.first?.earthDate)
                 } catch let error {
                     dump(error)
                 }
@@ -54,7 +52,6 @@ final class NetworkManager: Networkable {
                 do {
                     let results = try JSONDecoder().decode(DataResults.self, from: response.data)
                     completion(results.photos)
-                    print(results.photos.first?.earthDate)
                 } catch let error {
                     dump(error)
                 }

@@ -17,12 +17,15 @@ final class OpportunityViewController: UIViewController {
     @IBOutlet weak var noPhotoView: UIView!
     @IBOutlet weak var cameraPicker: UIPickerView!
     @IBOutlet weak var searchButton: UIButton!
-    
+    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     lazy var opportunityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = ""
+    lazy var cameraQuery: String = "FHAZ"
+    // For default case
     lazy var selectedPage: Int = 1
     
     var screenState: CameraListState? {
@@ -32,14 +35,19 @@ final class OpportunityViewController: UIViewController {
                 collectionView.isHidden = true
                 noPhotoView.isHidden = true
                 filterView.isHidden = false
+                filterButton.title = ""
             case .loaded:
                 filterView.isHidden = true
-                noPhotoView.isHidden = true
+                noPhotoView.isHidden = false
                 collectionView.isHidden = false
-            default:
+                filterButton.title = "Filter"
+            case .empty:
                 filterView.isHidden = true
                 collectionView.isHidden = true
                 noPhotoView.isHidden = false
+                filterButton.title = "Filter"
+            case .none:
+                print("we got an issue about changing states of screen!")
             }
         }
     }
@@ -47,6 +55,7 @@ final class OpportunityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        screenState = .loaded
         setUpDelegations()
         getsRoverData(page: selectedPage)
     }
@@ -58,20 +67,23 @@ final class OpportunityViewController: UIViewController {
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
         getCurvyButton(searchButton)
+        getCurvyButton(closeButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
-        if screenState == .searching {
-            screenState = .loaded
-        } else {
+        if screenState == .loaded || screenState == .empty {
             screenState = .searching
         }
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: selectedPage)
+        fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: 1)
+        // page 1 added because there might be no photos in page x about user's camera selection
         screenState = .loaded
-        
+    }
+    
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        screenState = .loaded
     }
 }
 
@@ -80,9 +92,16 @@ extension OpportunityViewController {
     func getsRoverData(page: Int) {
         networkManager.fetchOppurtunityRover(page: page) { [weak self] photos in
             guard let self = self else { return }
-            self.opportunityData = photos
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
+            if photos.isEmpty {
+                self.screenState = .empty
+                self.activityIndicator.isHidden = true
+            } else {
+                self.opportunityData.append(contentsOf: photos)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                    self.collectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
+                })
             }
         }
     }
@@ -132,6 +151,18 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
         let size = CGSize(width: view.frame.width, height: view.frame.height)
         return size
     }
+    
+    //MARK: - Pagination
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.opportunityData.count - 1 {
+            activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            selectedPage += 1
+            getsRoverData(page: selectedPage)
+        }
+    }
+    
+    
 }
 
 //MARK: - CameraPicker Delegate

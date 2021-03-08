@@ -57,18 +57,26 @@ extension NasaAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .opportunity(page: let page),
-             .curiosity(page: let page),
-             .spirit(page: let page):
+        case .curiosity(page: let page):
             return .requestParameters(parameters: ["api_key" : APIKey,
                                                    "sol" : 1000,
                                                    "page" : page], encoding: URLEncoding.queryString)
+        case .opportunity(page: let page),
+             .spirit(page: let page):
+            return .requestParameters(parameters: ["api_key" : APIKey,
+                                                   "sol" : 1,
+                                                   "page" : page], encoding: URLEncoding.queryString)
             
-        case .opportunitySearch(camera: let camera, page: let page),
-             .curiositySearch(camera: let camera, page: let page),
-             .spiritSearch(camera: let camera, page: let page):
+            
+        case .curiositySearch(camera: let camera, page: let page):
             return .requestParameters(parameters: ["api_key" : APIKey,
                                                    "sol" : 1000,
+                                                   "camera" : camera,
+                                                   "page" : page], encoding: URLEncoding.queryString)
+        case .opportunitySearch(camera: let camera, page: let page),
+             .spiritSearch(camera: let camera, page: let page):
+            return .requestParameters(parameters: ["api_key" : APIKey,
+                                                   "sol" : 1,
                                                    "camera" : camera,
                                                    "page" : page], encoding: URLEncoding.queryString)
         }
