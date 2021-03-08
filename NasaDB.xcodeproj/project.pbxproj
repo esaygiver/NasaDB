@@ -23,10 +23,8 @@
 		849EF64325F01C190021170A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64225F01C190021170A /* API.swift */; };
 		849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64425F01E8C0021170A /* NetworkManager.swift */; };
 		849EF64725F01EDB0021170A /* Networkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64625F01EDB0021170A /* Networkable.swift */; };
-		849EF64A25F037160021170A /* OpportunityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */; };
 		849EF64C25F043770021170A /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64B25F043770021170A /* PopUpViewController.swift */; };
-		849EF64F25F0D3110021170A /* CuriosityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */; };
-		849EF65225F0D5B80021170A /* SpiritCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */; };
+		849EF64F25F0D3110021170A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF64E25F0D3110021170A /* PhotoCollectionViewCell.swift */; };
 		84CFE72225F50E1C00BC3F56 /* CameraListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFE72125F50E1C00BC3F56 /* CameraListState.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +47,8 @@
 		849EF64225F01C190021170A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		849EF64425F01E8C0021170A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		849EF64625F01EDB0021170A /* Networkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkable.swift; sourceTree = "<group>"; };
-		849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpportunityCollectionViewCell.swift; sourceTree = "<group>"; };
 		849EF64B25F043770021170A /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriosityCollectionViewCell.swift; sourceTree = "<group>"; };
-		849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritCollectionViewCell.swift; sourceTree = "<group>"; };
+		849EF64E25F0D3110021170A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		84CFE72125F50E1C00BC3F56 /* CameraListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraListState.swift; sourceTree = "<group>"; };
 		ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NasaDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F12611E582972D6DFEF699F9 /* Pods-NasaDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.release.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +113,7 @@
 			children = (
 				849EF62125EFCBDE0021170A /* Main.storyboard */,
 				849EF62625EFCBE00021170A /* LaunchScreen.storyboard */,
+				849EF64E25F0D3110021170A /* PhotoCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				849EF63125EFCF140021170A /* OpportunityViewController.swift */,
-				849EF64925F037160021170A /* OpportunityCollectionViewCell.swift */,
 			);
 			path = "Opportunity VC";
 			sourceTree = "<group>";
@@ -190,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */,
-				849EF64E25F0D3110021170A /* CuriosityCollectionViewCell.swift */,
 			);
 			path = "Curiosity VC";
 			sourceTree = "<group>";
@@ -207,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				849EF63325EFCF2C0021170A /* SpiritViewController.swift */,
-				849EF65125F0D5B80021170A /* SpiritCollectionViewCell.swift */,
 			);
 			path = "Spirit VC";
 			sourceTree = "<group>";
@@ -345,18 +339,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				849EF63D25F0199C0021170A /* Camera.swift in Sources */,
-				849EF64A25F037160021170A /* OpportunityCollectionViewCell.swift in Sources */,
 				849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */,
 				849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */,
 				849EF63925F0172A0021170A /* Photos.swift in Sources */,
-				849EF64F25F0D3110021170A /* CuriosityCollectionViewCell.swift in Sources */,
+				849EF64F25F0D3110021170A /* PhotoCollectionViewCell.swift in Sources */,
 				849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */,
 				849EF64325F01C190021170A /* API.swift in Sources */,
 				849EF63425EFCF2C0021170A /* SpiritViewController.swift in Sources */,
 				84CFE72225F50E1C00BC3F56 /* CameraListState.swift in Sources */,
 				849EF63225EFCF140021170A /* OpportunityViewController.swift in Sources */,
 				849EF64C25F043770021170A /* PopUpViewController.swift in Sources */,
-				849EF65225F0D5B80021170A /* SpiritCollectionViewCell.swift in Sources */,
 				849EF64025F01B580021170A /* imageView + KF.swift in Sources */,
 				849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */,
 				849EF64725F01EDB0021170A /* Networkable.swift in Sources */,

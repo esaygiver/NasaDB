@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CuriosityCollectionViewCell: UICollectionViewCell {
+class PhotoCollectionViewCell: UICollectionViewCell {
     
     //MARK: - IBOutlets
     @IBOutlet weak var imageView: UIImageView!

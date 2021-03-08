@@ -18,6 +18,7 @@ final class PopUpViewController: UIViewController {
     @IBOutlet weak var earthDate: UILabel!
     @IBOutlet weak var roverStatus: UILabel!
     @IBOutlet weak var photoDate: UILabel!
+    @IBOutlet weak var closePopUp: UIButton!
     
     var roverData: Photo!
     
@@ -31,7 +32,6 @@ final class PopUpViewController: UIViewController {
     @IBAction func closePopUp(_ sender: UIButton) {
         self.view.removeFromSuperview()
     }
-
 }
 
 extension PopUpViewController {
@@ -43,5 +43,13 @@ extension PopUpViewController {
         earthDate.text = "Earth: \(roverData.earthDate)"
         roverStatus.text = "Status: \(roverData.rover.status)"
         photoDate.text = "Photo: \(roverData.rover.landingDate)"
+        getCurvyButton(closePopUp)
+    }
+}
+
+//MARK: - Button with curves
+extension PopUpViewController {
+    func getCurvyButton(_ button: UIButton) {
+        button.layer.cornerRadius = button.frame.size.height / 2
     }
 }

@@ -18,15 +18,18 @@ final class OpportunityViewController: UIViewController {
     @IBOutlet weak var cameraPicker: UIPickerView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var searchingPage: UILabel!
+    @IBOutlet weak var pageStepper: UIStepper!
     
     lazy var opportunityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
     lazy var cameraQuery: String = "FHAZ"
     // For default case
-    lazy var selectedPage: Int = 1
+    lazy var nextPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
@@ -57,7 +60,7 @@ final class OpportunityViewController: UIViewController {
         
         screenState = .loaded
         setUpDelegations()
-        getsRoverData(page: selectedPage)
+        getsRoverData(page: nextPage)
     }
     
     func setUpDelegations() {
@@ -68,12 +71,23 @@ final class OpportunityViewController: UIViewController {
         cameraPicker.dataSource = self
         getCurvyButton(searchButton)
         getCurvyButton(closeButton)
+        getCurvyButton(seeAllButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .loaded || screenState == .empty {
             screenState = .searching
         }
+    }
+    
+    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
+        searchingPage.text = Int(pageStepper.value).description
+    }
+    
+    @IBAction func seeAllButtonTapped(_ sender: UIButton) {
+        opportunityData = []
+        getsRoverData(page: 1)
+        screenState = .loaded
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
@@ -130,7 +144,7 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath) as! OpportunityCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OpportunityCell", for: indexPath) as! PhotoCollectionViewCell
         let selectedCell = opportunityData[indexPath.row]
         cell.configureImages(with: selectedCell)
         return cell
@@ -157,8 +171,8 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
         if indexPath.row == self.opportunityData.count - 1 {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            selectedPage += 1
-            getsRoverData(page: selectedPage)
+            nextPage += 1
+            getsRoverData(page: nextPage)
         }
     }
     

@@ -17,15 +17,18 @@ final class SpiritViewController: UIViewController {
     @IBOutlet weak var cameraPicker: UIPickerView!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var searchingPage: UILabel!
+    @IBOutlet weak var pageStepper: UIStepper!
     
     lazy var spiritData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
     lazy var cameraQuery: String = "FHAZ"
     // for default case
-    lazy var selectedPage: Int = 1
+    lazy var nextPage: Int = 1
     
     var screenState: CameraListState? {
         didSet {
@@ -56,7 +59,7 @@ final class SpiritViewController: UIViewController {
 
         screenState = .loaded
         setUpDelegatios()
-        getsRoverData(page: selectedPage)
+        getsRoverData(page: nextPage)
     }
     
     func setUpDelegatios() {
@@ -67,12 +70,23 @@ final class SpiritViewController: UIViewController {
         cameraPicker.dataSource = self
         getCurvyButton(searchButton)
         getCurvyButton(closeButton)
+        getCurvyButton(seeAllButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
         if screenState == .loaded || screenState == .empty {
             screenState = .searching
         }
+    }
+    
+    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
+        searchingPage.text = Int(pageStepper.value).description
+    }
+    
+    @IBAction func seeAllButtonTapped(_ sender: UIButton) {
+        spiritData = []
+        getsRoverData(page: 1)
+        screenState = .loaded
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
@@ -128,7 +142,7 @@ extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpiritCell", for: indexPath) as! SpiritCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SpiritCell", for: indexPath) as! PhotoCollectionViewCell
         let selectedCell = spiritData[indexPath.row]
         cell.configureImages(with: selectedCell)
         return cell
@@ -155,8 +169,8 @@ extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if indexPath.row == self.spiritData.count - 1 {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
-            selectedPage += 1
-            getsRoverData(page: selectedPage)
+            nextPage += 1
+            getsRoverData(page: nextPage)
         }
     }
 }
