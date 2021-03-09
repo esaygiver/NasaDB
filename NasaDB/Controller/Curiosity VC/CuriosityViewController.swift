@@ -92,15 +92,14 @@ final class CuriosityViewController: UIViewController {
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        curiosityData = []
         fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int(searchingPage.text!)!)
-        // page 1 added because there might be no photos in page x about user's camera selection
         screenState = .loaded
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         screenState = .loaded
     }
-
 }
 
 //MARK: - Network Request
@@ -110,7 +109,8 @@ extension CuriosityViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
-                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
                 self.curiosityData.append(contentsOf: photos)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
@@ -128,12 +128,15 @@ extension CuriosityViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
-                self.curiosityData = photos
+                self.curiosityData.append(contentsOf: photos)
                 self.screenState = .loaded
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-                
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
                 }
             }
         }
@@ -172,11 +175,19 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: - Pagination
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == self.curiosityData.count - 1 {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-            nextPage += 1
-            getsRoverData(page: nextPage)
+        if cameraQuery != "FHAZ" {
+            if indexPath.row == self.curiosityData.count {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int(searchingPage.text!)!)
+            }
+        } else {
+            if indexPath.row == self.curiosityData.count - 1 {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                nextPage += 1
+                getsRoverData(page: nextPage)
+            }
         }
     }
 }

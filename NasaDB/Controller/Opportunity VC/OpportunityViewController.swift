@@ -22,12 +22,11 @@ final class OpportunityViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var searchingPage: UILabel!
-    @IBOutlet weak var pageStepper: UIStepper!
     
     lazy var opportunityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = "FHAZ"
+    lazy var cameraQuery: String = ""
     // For default case
     lazy var nextPage: Int = 1
     
@@ -80,19 +79,14 @@ final class OpportunityViewController: UIViewController {
         }
     }
     
-    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
-        searchingPage.text = Int(pageStepper.value).description
-    }
-    
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
-        opportunityData = []
         getsRoverData(page: 1)
+        cameraQuery = ""
         screenState = .loaded
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: 1)
-        // page 1 added because there might be no photos in page x about user's camera selection
         screenState = .loaded
     }
     
@@ -125,14 +119,37 @@ extension OpportunityViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
                 self.opportunityData = photos
                 self.screenState = .loaded
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
                 }
             }
         }
+    }
+}
+
+//MARK: - CameraPicker Delegate
+extension OpportunityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cameraTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
     }
 }
 
@@ -168,34 +185,22 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
     
     //MARK: - Pagination
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         if indexPath.row == self.opportunityData.count - 1 {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-            nextPage += 1
-            getsRoverData(page: nextPage)
+            if cameraQuery == cameraTypes.randomElement() {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                fetchCameraTypeOfOpportunityRover(camera: cameraQuery, page: 1)
+            }
+            else if cameraQuery == "" {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                nextPage += 1
+                getsRoverData(page: nextPage)
+            }
         }
     }
     
-    
-}
-
-//MARK: - CameraPicker Delegate
-extension OpportunityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return cameraTypes.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return cameraTypes[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        cameraQuery = cameraTypes[row]
-    }
 }
 
 //MARK: - Button with curves
