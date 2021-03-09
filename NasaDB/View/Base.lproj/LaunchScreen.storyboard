@@ -15,21 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGz-aA-Ewv">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppCent" translatesAutoresizingMaskIntoConstraints="NO" id="FXp-OF-S99">
                                 <rect key="frame" x="87" y="384" width="240" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="Rgb-sF-DA1"/>
-                                    <constraint firstAttribute="width" constant="240" id="pzp-5Y-KaZ"/>
-                                </constraints>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="KGz-aA-Ewv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Wbq-5y-IQW"/>
-                            <constraint firstItem="KGz-aA-Ewv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="oPn-Ok-miS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KGz-aA-Ewv" secondAttribute="trailing" constant="87" id="wG1-76-bSc"/>
-                            <constraint firstItem="KGz-aA-Ewv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="z4i-G6-fs4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FXp-OF-S99" secondAttribute="bottom" constant="350" id="3X6-NG-8g1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FXp-OF-S99" secondAttribute="trailing" constant="87" id="8ry-0O-WSh"/>
+                            <constraint firstItem="FXp-OF-S99" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bB9-si-4J5"/>
+                            <constraint firstItem="FXp-OF-S99" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="rma-nM-5Fh"/>
+                            <constraint firstItem="FXp-OF-S99" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="wYu-nI-FWC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,4 +35,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppCent" width="400" height="175"/>
+    </resources>
 </document>

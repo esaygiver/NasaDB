@@ -25,7 +25,7 @@ final class PopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         updatingOutlets()
     }
     
@@ -43,13 +43,7 @@ extension PopUpViewController {
         earthDate.text = "Earth: \(roverData.earthDate)"
         roverStatus.text = "Status: \(roverData.rover.status)"
         photoDate.text = "Photo: \(roverData.rover.landingDate)"
-        getCurvyButton(closePopUp)
+        closePopUp.getCurvyButton(closePopUp)
     }
 }
 
-//MARK: - Button with curves
-extension PopUpViewController {
-    func getCurvyButton(_ button: UIButton) {
-        button.layer.cornerRadius = button.frame.size.height / 2
-    }
-}

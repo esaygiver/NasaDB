@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23DA93BD8669D0A1D88DBECA /* Pods_NasaDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2E884B3A1374D9D2AFE59C /* Pods_NasaDB.framework */; };
+		8447F9B225F7D3B500AF1731 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447F9B125F7D3B500AF1731 /* UIButton.swift */; };
 		849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61B25EFCBDE0021170A /* AppDelegate.swift */; };
 		849EF61E25EFCBDE0021170A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61D25EFCBDE0021170A /* SceneDelegate.swift */; };
 		849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EF61F25EFCBDE0021170A /* CuriosityViewController.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		1188A7C1BC9BCCE290D23A39 /* Pods-NasaDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NasaDB.debug.xcconfig"; path = "Target Support Files/Pods-NasaDB/Pods-NasaDB.debug.xcconfig"; sourceTree = "<group>"; };
+		8447F9B125F7D3B500AF1731 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		849EF61825EFCBDE0021170A /* NasaDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NasaDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849EF61B25EFCBDE0021170A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		849EF61D25EFCBDE0021170A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				849EF63F25F01B580021170A /* imageView + KF.swift */,
+				8447F9B125F7D3B500AF1731 /* UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				849EF63D25F0199C0021170A /* Camera.swift in Sources */,
 				849EF62025EFCBDE0021170A /* CuriosityViewController.swift in Sources */,
 				849EF61C25EFCBDE0021170A /* AppDelegate.swift in Sources */,
+				8447F9B225F7D3B500AF1731 /* UIButton.swift in Sources */,
 				849EF63925F0172A0021170A /* Photos.swift in Sources */,
 				849EF64F25F0D3110021170A /* PhotoCollectionViewCell.swift in Sources */,
 				849EF64525F01E8C0021170A /* NetworkManager.swift in Sources */,

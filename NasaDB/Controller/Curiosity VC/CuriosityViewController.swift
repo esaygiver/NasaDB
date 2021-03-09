@@ -20,13 +20,11 @@ final class CuriosityViewController: UIViewController {
     @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
-    @IBOutlet weak var searchingPage: UILabel!
-    @IBOutlet weak var pageStepper: UIStepper!
     
     lazy var curiosityData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = "FHAZ"
+    lazy var cameraQuery: String = ""
     // For default case
     lazy var nextPage: Int = 1
     
@@ -69,9 +67,9 @@ final class CuriosityViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
-        getCurvyButton(searchButton)
-        getCurvyButton(closeButton)
-        getCurvyButton(seeAllButton)
+        searchButton.getCurvyButton(searchButton)
+        closeButton.getCurvyButton(closeButton)
+        seeAllButton.getCurvyButton(seeAllButton)
         
     }
     
@@ -81,19 +79,14 @@ final class CuriosityViewController: UIViewController {
         }
     }
     
-    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
-        searchingPage.text = Int(pageStepper.value).description
-    }
-    
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
-        curiosityData = []
         getsRoverData(page: 1)
+        cameraQuery = ""
         screenState = .loaded
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        curiosityData = []
-        fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int(searchingPage.text!)!)
+        fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: 1)
         screenState = .loaded
     }
     
@@ -131,7 +124,7 @@ extension CuriosityViewController {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidesWhenStopped = true
             } else {
-                self.curiosityData.append(contentsOf: photos)
+                self.curiosityData = photos
                 self.screenState = .loaded
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -140,6 +133,25 @@ extension CuriosityViewController {
                 }
             }
         }
+    }
+}
+
+//MARK: - CameraPicker Delegate
+extension CuriosityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cameraTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
     }
 }
 
@@ -175,14 +187,14 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: - Pagination
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if cameraQuery != "FHAZ" {
-            if indexPath.row == self.curiosityData.count {
+        
+        if indexPath.row == self.curiosityData.count - 1 {
+            if cameraQuery == cameraTypes.randomElement() {
                 activityIndicator.isHidden = false
                 activityIndicator.startAnimating()
-                fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: Int(searchingPage.text!)!)
+                fetchCameraTypeOfCuriosityRover(camera: cameraQuery, page: 1)
             }
-        } else {
-            if indexPath.row == self.curiosityData.count - 1 {
+            else if cameraQuery == "" {
                 activityIndicator.isHidden = false
                 activityIndicator.startAnimating()
                 nextPage += 1
@@ -192,30 +204,5 @@ extension CuriosityViewController: UICollectionViewDelegate, UICollectionViewDat
     }
 }
 
-//MARK: - CameraPicker Delegate
-extension CuriosityViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return cameraTypes.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return cameraTypes[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        cameraQuery = cameraTypes[row]
-    }
-}
-
-//MARK: - Button with curves
-extension CuriosityViewController {
-    func getCurvyButton(_ button: UIButton) {
-        button.layer.cornerRadius = button.frame.size.height / 2
-    }
-}
 
 

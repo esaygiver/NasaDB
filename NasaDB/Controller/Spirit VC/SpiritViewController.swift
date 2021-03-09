@@ -20,13 +20,11 @@ final class SpiritViewController: UIViewController {
     @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
-    @IBOutlet weak var searchingPage: UILabel!
-    @IBOutlet weak var pageStepper: UIStepper!
     
     lazy var spiritData = [Photo]()
     public var networkManager = NetworkManager()
     lazy var cameraTypes = ["FHAZ", "RHAZ", "MAST", "CHEMCAM", "MAHLI", "MARDI", "NAVCAM", "PANCAM", "MINITES"]
-    lazy var cameraQuery: String = "FHAZ"
+    lazy var cameraQuery: String = ""
     // for default case
     lazy var nextPage: Int = 1
     
@@ -68,9 +66,9 @@ final class SpiritViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
-        getCurvyButton(searchButton)
-        getCurvyButton(closeButton)
-        getCurvyButton(seeAllButton)
+        searchButton.getCurvyButton(searchButton)
+        closeButton.getCurvyButton(closeButton)
+        seeAllButton.getCurvyButton(seeAllButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
@@ -79,19 +77,14 @@ final class SpiritViewController: UIViewController {
         }
     }
     
-    @IBAction func pageValueChangedAtSearching(_ sender: UIStepper) {
-        searchingPage.text = Int(pageStepper.value).description
-    }
-    
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
-        spiritData = []
         getsRoverData(page: 1)
         screenState = .loaded
+        cameraQuery = ""
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
         fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: 1)
-        // page 1 added because there might be no photos in page x about user's camera selection
         screenState = .loaded
     }
     
@@ -108,9 +101,11 @@ extension SpiritViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
-                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
                 self.spiritData.append(contentsOf: photos)
+                self.screenState = .loaded
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                     self.collectionView.reloadData()
                     self.activityIndicator.stopAnimating()
@@ -125,16 +120,40 @@ extension SpiritViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
                 self.spiritData = photos
                 self.screenState = .loaded
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
                 }
             }
         }
     }
 }
+
+//MARK: - CameraPicker Delegate
+extension SpiritViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return cameraTypes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return cameraTypes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        cameraQuery = cameraTypes[row]
+    }
+}
+
 //MARK: - CollectionView Delegate & DataSource & Flowlayout
 extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -166,39 +185,21 @@ extension SpiritViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     //MARK: - Pagination
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         if indexPath.row == self.spiritData.count - 1 {
-            activityIndicator.isHidden = false
-            activityIndicator.startAnimating()
-            nextPage += 1
-            getsRoverData(page: nextPage)
+            if cameraQuery == cameraTypes.randomElement() {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                fetchCameraTypeOfSpiritRover(camera: cameraQuery, page: 1)
+            }
+            else if cameraQuery == "" {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+                nextPage += 1
+                getsRoverData(page: nextPage)
+            }
         }
     }
 }
 
-
-//MARK: - CameraPicker Delegate
-extension SpiritViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return cameraTypes.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return cameraTypes[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        cameraQuery = cameraTypes[row]
-    }
-}
-
-//MARK: - Button with curves
-extension SpiritViewController {
-    func getCurvyButton(_ button: UIButton) {
-        button.layer.cornerRadius = button.frame.size.height / 2
-    }
-}
 

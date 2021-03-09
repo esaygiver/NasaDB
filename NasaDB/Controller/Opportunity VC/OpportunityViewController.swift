@@ -21,7 +21,6 @@ final class OpportunityViewController: UIViewController {
     @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterButton: UIBarButtonItem!
-    @IBOutlet weak var searchingPage: UILabel!
     
     lazy var opportunityData = [Photo]()
     public var networkManager = NetworkManager()
@@ -68,9 +67,9 @@ final class OpportunityViewController: UIViewController {
         collectionView.isPagingEnabled = true
         cameraPicker.delegate = self
         cameraPicker.dataSource = self
-        getCurvyButton(searchButton)
-        getCurvyButton(closeButton)
-        getCurvyButton(seeAllButton)
+        searchButton.getCurvyButton(searchButton)
+        closeButton.getCurvyButton(closeButton)
+        seeAllButton.getCurvyButton(seeAllButton)
     }
     
     @IBAction func filterButtonTapped(_ sender: UIBarButtonItem) {
@@ -102,9 +101,11 @@ extension OpportunityViewController {
             guard let self = self else { return }
             if photos.isEmpty {
                 self.screenState = .empty
-                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
             } else {
                 self.opportunityData.append(contentsOf: photos)
+                self.screenState = .loaded
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                     self.collectionView.reloadData()
                     self.activityIndicator.stopAnimating()
@@ -201,11 +202,4 @@ extension OpportunityViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     
-}
-
-//MARK: - Button with curves
-extension OpportunityViewController {
-    func getCurvyButton(_ button: UIButton) {
-        button.layer.cornerRadius = button.frame.size.height / 2
-    }
 }
